@@ -25,7 +25,7 @@ open class PinsAPI: APIBase {
 
     /**
      Unpin a topic
-     - DELETE /v0.5/users/me/pins/{topicHandle}
+     - DELETE /v0.6/users/me/pins/{topicHandle}
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -36,7 +36,7 @@ open class PinsAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func myPinsDeletePinWithRequestBuilder(topicHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.5/users/me/pins/{topicHandle}"
+        var path = "/v0.6/users/me/pins/{topicHandle}"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -67,7 +67,7 @@ open class PinsAPI: APIBase {
 
     /**
      Get my pins
-     - GET /v0.5/users/me/pins
+     - GET /v0.6/users/me/pins
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -161,7 +161,7 @@ open class PinsAPI: APIBase {
      - returns: RequestBuilder<FeedResponseTopicView> 
      */
     open class func myPinsGetPinsWithRequestBuilder(cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
-        let path = "/v0.5/users/me/pins"
+        let path = "/v0.6/users/me/pins"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [
@@ -193,7 +193,7 @@ open class PinsAPI: APIBase {
 
     /**
      Pin a topic
-     - POST /v0.5/users/me/pins
+     - POST /v0.6/users/me/pins
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -204,7 +204,7 @@ open class PinsAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func myPinsPostPinWithRequestBuilder(request: PostPinRequest) -> RequestBuilder<Object> {
-        let path = "/v0.5/users/me/pins"
+        let path = "/v0.6/users/me/pins"
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
  

@@ -25,7 +25,7 @@ open class LikesAPI: APIBase {
 
     /**
      Remove like from comment
-     - DELETE /v0.5/comments/{commentHandle}/likes/me
+     - DELETE /v0.6/comments/{commentHandle}/likes/me
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -36,7 +36,7 @@ open class LikesAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func commentLikesDeleteLikeWithRequestBuilder(commentHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.5/comments/{commentHandle}/likes/me"
+        var path = "/v0.6/comments/{commentHandle}/likes/me"
         path = path.replacingOccurrences(of: "{commentHandle}", with: "\(commentHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -68,7 +68,7 @@ open class LikesAPI: APIBase {
 
     /**
      Get likes for comment
-     - GET /v0.5/comments/{commentHandle}/likes
+     - GET /v0.6/comments/{commentHandle}/likes
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -105,7 +105,7 @@ open class LikesAPI: APIBase {
      - returns: RequestBuilder<FeedResponseUserCompactView> 
      */
     open class func commentLikesGetLikesWithRequestBuilder(commentHandle: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseUserCompactView> {
-        var path = "/v0.5/comments/{commentHandle}/likes"
+        var path = "/v0.6/comments/{commentHandle}/likes"
         path = path.replacingOccurrences(of: "{commentHandle}", with: "\(commentHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -138,7 +138,7 @@ open class LikesAPI: APIBase {
 
     /**
      Add like to comment
-     - POST /v0.5/comments/{commentHandle}/likes
+     - POST /v0.6/comments/{commentHandle}/likes
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -149,7 +149,7 @@ open class LikesAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func commentLikesPostLikeWithRequestBuilder(commentHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.5/comments/{commentHandle}/likes"
+        var path = "/v0.6/comments/{commentHandle}/likes"
         path = path.replacingOccurrences(of: "{commentHandle}", with: "\(commentHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -179,7 +179,7 @@ open class LikesAPI: APIBase {
 
     /**
      Remove like from reply
-     - DELETE /v0.5/replies/{replyHandle}/likes/me
+     - DELETE /v0.6/replies/{replyHandle}/likes/me
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -190,7 +190,7 @@ open class LikesAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func replyLikesDeleteLikeWithRequestBuilder(replyHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.5/replies/{replyHandle}/likes/me"
+        var path = "/v0.6/replies/{replyHandle}/likes/me"
         path = path.replacingOccurrences(of: "{replyHandle}", with: "\(replyHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -222,7 +222,7 @@ open class LikesAPI: APIBase {
 
     /**
      Get likes for reply
-     - GET /v0.5/replies/{replyHandle}/likes
+     - GET /v0.6/replies/{replyHandle}/likes
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -259,7 +259,7 @@ open class LikesAPI: APIBase {
      - returns: RequestBuilder<FeedResponseUserCompactView> 
      */
     open class func replyLikesGetLikesWithRequestBuilder(replyHandle: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseUserCompactView> {
-        var path = "/v0.5/replies/{replyHandle}/likes"
+        var path = "/v0.6/replies/{replyHandle}/likes"
         path = path.replacingOccurrences(of: "{replyHandle}", with: "\(replyHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -292,7 +292,7 @@ open class LikesAPI: APIBase {
 
     /**
      Add like to reply
-     - POST /v0.5/replies/{replyHandle}/likes
+     - POST /v0.6/replies/{replyHandle}/likes
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -303,7 +303,7 @@ open class LikesAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func replyLikesPostLikeWithRequestBuilder(replyHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.5/replies/{replyHandle}/likes"
+        var path = "/v0.6/replies/{replyHandle}/likes"
         path = path.replacingOccurrences(of: "{replyHandle}", with: "\(replyHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -333,7 +333,7 @@ open class LikesAPI: APIBase {
 
     /**
      Remove like from topic
-     - DELETE /v0.5/topics/{topicHandle}/likes/me
+     - DELETE /v0.6/topics/{topicHandle}/likes/me
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -344,7 +344,7 @@ open class LikesAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func topicLikesDeleteLikeWithRequestBuilder(topicHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.5/topics/{topicHandle}/likes/me"
+        var path = "/v0.6/topics/{topicHandle}/likes/me"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -376,7 +376,7 @@ open class LikesAPI: APIBase {
 
     /**
      Get likes for topic
-     - GET /v0.5/topics/{topicHandle}/likes
+     - GET /v0.6/topics/{topicHandle}/likes
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -413,7 +413,7 @@ open class LikesAPI: APIBase {
      - returns: RequestBuilder<FeedResponseUserCompactView> 
      */
     open class func topicLikesGetLikesWithRequestBuilder(topicHandle: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseUserCompactView> {
-        var path = "/v0.5/topics/{topicHandle}/likes"
+        var path = "/v0.6/topics/{topicHandle}/likes"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -446,7 +446,7 @@ open class LikesAPI: APIBase {
 
     /**
      Add like to topic
-     - POST /v0.5/topics/{topicHandle}/likes
+     - POST /v0.6/topics/{topicHandle}/likes
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -457,7 +457,7 @@ open class LikesAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func topicLikesPostLikeWithRequestBuilder(topicHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.5/topics/{topicHandle}/likes"
+        var path = "/v0.6/topics/{topicHandle}/likes"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 

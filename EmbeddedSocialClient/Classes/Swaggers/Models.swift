@@ -794,7 +794,7 @@ class Decoders {
             let sourceDictionary = source as! [AnyHashable: Any]
 
             let instance = PutPushRegistrationRequest()
-            instance.lastUpdatedTime = Decoders.decodeOptional(clazz: Date.self, source: sourceDictionary["lastUpdatedTime"] as AnyObject?)
+            instance.lastUpdatedTime = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["lastUpdatedTime"] as AnyObject?)
             instance.language = Decoders.decodeOptional(clazz: String.self, source: sourceDictionary["language"] as AnyObject?)
             return instance
         }

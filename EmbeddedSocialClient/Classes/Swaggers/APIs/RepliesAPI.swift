@@ -27,7 +27,7 @@ open class RepliesAPI: APIBase {
 
     /**
      Get replies for a comment
-     - GET /v0.5/comments/{commentHandle}/replies
+     - GET /v0.6/comments/{commentHandle}/replies
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -88,7 +88,7 @@ open class RepliesAPI: APIBase {
      - returns: RequestBuilder<FeedResponseReplyView> 
      */
     open class func commentRepliesGetRepliesWithRequestBuilder(commentHandle: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseReplyView> {
-        var path = "/v0.5/comments/{commentHandle}/replies"
+        var path = "/v0.6/comments/{commentHandle}/replies"
         path = path.replacingOccurrences(of: "{commentHandle}", with: "\(commentHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -122,7 +122,7 @@ open class RepliesAPI: APIBase {
 
     /**
      Create a new reply
-     - POST /v0.5/comments/{commentHandle}/replies
+     - POST /v0.6/comments/{commentHandle}/replies
      - examples: [{contentType=application/json, example={
   "replyHandle" : "aeiou"
 }}, {contentType=application/xml, example=<null>
@@ -140,7 +140,7 @@ open class RepliesAPI: APIBase {
      - returns: RequestBuilder<PostReplyResponse> 
      */
     open class func commentRepliesPostReplyWithRequestBuilder(commentHandle: String, request: PostReplyRequest) -> RequestBuilder<PostReplyResponse> {
-        var path = "/v0.5/comments/{commentHandle}/replies"
+        var path = "/v0.6/comments/{commentHandle}/replies"
         path = path.replacingOccurrences(of: "{commentHandle}", with: "\(commentHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
@@ -167,7 +167,7 @@ open class RepliesAPI: APIBase {
 
     /**
      Delete reply
-     - DELETE /v0.5/replies/{replyHandle}
+     - DELETE /v0.6/replies/{replyHandle}
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -178,7 +178,7 @@ open class RepliesAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func repliesDeleteReplyWithRequestBuilder(replyHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.5/replies/{replyHandle}"
+        var path = "/v0.6/replies/{replyHandle}"
         path = path.replacingOccurrences(of: "{replyHandle}", with: "\(replyHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -208,7 +208,7 @@ open class RepliesAPI: APIBase {
 
     /**
      Get reply
-     - GET /v0.5/replies/{replyHandle}
+     - GET /v0.6/replies/{replyHandle}
      - examples: [{contentType=application/json, example={
   "topicHandle" : "aeiou",
   "commentHandle" : "aeiou",
@@ -279,7 +279,7 @@ open class RepliesAPI: APIBase {
      - returns: RequestBuilder<ReplyView> 
      */
     open class func repliesGetReplyWithRequestBuilder(replyHandle: String) -> RequestBuilder<ReplyView> {
-        var path = "/v0.5/replies/{replyHandle}"
+        var path = "/v0.6/replies/{replyHandle}"
         path = path.replacingOccurrences(of: "{replyHandle}", with: "\(replyHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 

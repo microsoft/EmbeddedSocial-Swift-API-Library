@@ -26,7 +26,7 @@ open class UsersAPI: APIBase {
 
     /**
      Find users the current user is following in another app but not in the current app
-     - GET /v0.5/users/me/apps/{appHandle}/following/difference
+     - GET /v0.6/users/me/apps/{appHandle}/following/difference
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -62,7 +62,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<FeedResponseUserCompactView> 
      */
     open class func myAppFollowingGetUsersWithRequestBuilder(appHandle: String, cursor: String? = nil) -> RequestBuilder<FeedResponseUserCompactView> {
-        var path = "/v0.5/users/me/apps/{appHandle}/following/difference"
+        var path = "/v0.6/users/me/apps/{appHandle}/following/difference"
         path = path.replacingOccurrences(of: "{appHandle}", with: "\(appHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -93,7 +93,7 @@ open class UsersAPI: APIBase {
 
     /**
      Get my list of Social Plus apps
-     - GET /v0.5/users/me/apps
+     - GET /v0.6/users/me/apps
      - examples: [{contentType=application/json, example=[ {
   "deepLink" : "aeiou",
   "name" : "aeiou",
@@ -128,7 +128,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<[AppCompactView]> 
      */
     open class func myAppsGetAppsWithRequestBuilder() -> RequestBuilder<[AppCompactView]> {
-        let path = "/v0.5/users/me/apps"
+        let path = "/v0.6/users/me/apps"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [:]
@@ -158,7 +158,7 @@ open class UsersAPI: APIBase {
 
     /**
      Get my liked topics.
-     - GET /v0.5/users/me/likes/topics
+     - GET /v0.6/users/me/likes/topics
      - Not yet implemented.
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
@@ -253,7 +253,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<FeedResponseTopicView> 
      */
     open class func myLikesGetLikedTopicsWithRequestBuilder(cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
-        let path = "/v0.5/users/me/likes/topics"
+        let path = "/v0.6/users/me/likes/topics"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [
@@ -297,7 +297,7 @@ open class UsersAPI: APIBase {
 
     /**
      Delete linked account
-     - DELETE /v0.5/users/me/linked_accounts/{identityProvider}
+     - DELETE /v0.6/users/me/linked_accounts/{identityProvider}
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -308,7 +308,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func myLinkedAccountsDeleteLinkedAccountWithRequestBuilder(identityProvider: IdentityProvider_myLinkedAccountsDeleteLinkedAccount) -> RequestBuilder<Object> {
-        var path = "/v0.5/users/me/linked_accounts/{identityProvider}"
+        var path = "/v0.6/users/me/linked_accounts/{identityProvider}"
         path = path.replacingOccurrences(of: "{identityProvider}", with: "\(identityProvider.rawValue)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -337,7 +337,7 @@ open class UsersAPI: APIBase {
 
     /**
      Get linked accounts. Each user has at least two linked accounts: one SocialPlus account, and one (or more) third-party account.
-     - GET /v0.5/users/me/linked_accounts
+     - GET /v0.6/users/me/linked_accounts
      - examples: [{contentType=application/json, example=[ {
   "accountId" : "aeiou",
   "identityProvider" : "aeiou"
@@ -356,7 +356,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<[LinkedAccountView]> 
      */
     open class func myLinkedAccountsGetLinkedAccountsWithRequestBuilder() -> RequestBuilder<[LinkedAccountView]> {
-        let path = "/v0.5/users/me/linked_accounts"
+        let path = "/v0.6/users/me/linked_accounts"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [:]
@@ -385,7 +385,7 @@ open class UsersAPI: APIBase {
 
     /**
      Create a new linked account.              The account to be linked must appear in the Auth header of the request. This new third-party account              will be linked against the credentials appearing in the session token passed in the body of the request.
-     - POST /v0.5/users/me/linked_accounts
+     - POST /v0.6/users/me/linked_accounts
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -396,7 +396,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func myLinkedAccountsPostLinkedAccountWithRequestBuilder(request: PostLinkedAccountRequest) -> RequestBuilder<Object> {
-        let path = "/v0.5/users/me/linked_accounts"
+        let path = "/v0.6/users/me/linked_accounts"
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
  
@@ -423,7 +423,7 @@ open class UsersAPI: APIBase {
 
     /**
      Get my topics sorted by popularity
-     - GET /v0.5/users/me/topics/popular
+     - GET /v0.6/users/me/topics/popular
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -517,7 +517,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<FeedResponseTopicView> 
      */
     open class func myTopicsGetPopularTopicsWithRequestBuilder(cursor: Int32? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
-        let path = "/v0.5/users/me/topics/popular"
+        let path = "/v0.6/users/me/topics/popular"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [
@@ -550,7 +550,7 @@ open class UsersAPI: APIBase {
 
     /**
      Get my topics sorted by creation time
-     - GET /v0.5/users/me/topics
+     - GET /v0.6/users/me/topics
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -644,7 +644,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<FeedResponseTopicView> 
      */
     open class func myTopicsGetTopicsWithRequestBuilder(cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
-        let path = "/v0.5/users/me/topics"
+        let path = "/v0.6/users/me/topics"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [
@@ -678,7 +678,7 @@ open class UsersAPI: APIBase {
 
     /**
      Get user topics sorted by popularity
-     - GET /v0.5/users/{userHandle}/topics/popular
+     - GET /v0.6/users/{userHandle}/topics/popular
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -773,7 +773,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<FeedResponseTopicView> 
      */
     open class func userTopicsGetPopularTopicsWithRequestBuilder(userHandle: String, cursor: Int32? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
-        var path = "/v0.5/users/{userHandle}/topics/popular"
+        var path = "/v0.6/users/{userHandle}/topics/popular"
         path = path.replacingOccurrences(of: "{userHandle}", with: "\(userHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -808,7 +808,7 @@ open class UsersAPI: APIBase {
 
     /**
      Get user topics sorted by creation time
-     - GET /v0.5/users/{userHandle}/topics
+     - GET /v0.6/users/{userHandle}/topics
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -903,7 +903,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<FeedResponseTopicView> 
      */
     open class func userTopicsGetTopicsWithRequestBuilder(userHandle: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
-        var path = "/v0.5/users/{userHandle}/topics"
+        var path = "/v0.6/users/{userHandle}/topics"
         path = path.replacingOccurrences(of: "{userHandle}", with: "\(userHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -935,7 +935,7 @@ open class UsersAPI: APIBase {
 
     /**
      Delete user
-     - DELETE /v0.5/users/me
+     - DELETE /v0.6/users/me
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -944,7 +944,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func usersDeleteUserWithRequestBuilder() -> RequestBuilder<Object> {
-        let path = "/v0.5/users/me"
+        let path = "/v0.6/users/me"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [:]
@@ -972,7 +972,7 @@ open class UsersAPI: APIBase {
 
     /**
      Get my profile
-     - GET /v0.5/users/me
+     - GET /v0.6/users/me
      - examples: [{contentType=application/json, example={
   "userHandle" : "aeiou",
   "followingStatus" : "aeiou",
@@ -1035,7 +1035,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<UserProfileView> 
      */
     open class func usersGetMyProfileWithRequestBuilder() -> RequestBuilder<UserProfileView> {
-        let path = "/v0.5/users/me"
+        let path = "/v0.6/users/me"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [:]
@@ -1065,7 +1065,7 @@ open class UsersAPI: APIBase {
 
     /**
      Get popular users
-     - GET /v0.5/users/popular
+     - GET /v0.6/users/popular
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -1113,7 +1113,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<FeedResponseUserProfileView> 
      */
     open class func usersGetPopularUsersWithRequestBuilder(cursor: Int32? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseUserProfileView> {
-        let path = "/v0.5/users/popular"
+        let path = "/v0.6/users/popular"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [
@@ -1145,7 +1145,7 @@ open class UsersAPI: APIBase {
 
     /**
      Get user profile
-     - GET /v0.5/users/{userHandle}
+     - GET /v0.6/users/{userHandle}
      - examples: [{contentType=application/json, example={
   "userHandle" : "aeiou",
   "followingStatus" : "aeiou",
@@ -1210,7 +1210,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<UserProfileView> 
      */
     open class func usersGetUserWithRequestBuilder(userHandle: String) -> RequestBuilder<UserProfileView> {
-        var path = "/v0.5/users/{userHandle}"
+        var path = "/v0.6/users/{userHandle}"
         path = path.replacingOccurrences(of: "{userHandle}", with: "\(userHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -1240,7 +1240,7 @@ open class UsersAPI: APIBase {
 
     /**
      Create a new user
-     - POST /v0.5/users
+     - POST /v0.6/users
      - Create a new user and return a fresh session token
      - examples: [{contentType=application/json, example={
   "userHandle" : "aeiou",
@@ -1262,7 +1262,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<PostUserResponse> 
      */
     open class func usersPostUserWithRequestBuilder(request: PostUserRequest) -> RequestBuilder<PostUserResponse> {
-        let path = "/v0.5/users"
+        let path = "/v0.6/users"
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
  
@@ -1288,7 +1288,7 @@ open class UsersAPI: APIBase {
 
     /**
      Update user info
-     - PUT /v0.5/users/me/info
+     - PUT /v0.6/users/me/info
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -1299,7 +1299,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func usersPutUserInfoWithRequestBuilder(request: PutUserInfoRequest) -> RequestBuilder<Object> {
-        let path = "/v0.5/users/me/info"
+        let path = "/v0.6/users/me/info"
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
  
@@ -1325,7 +1325,7 @@ open class UsersAPI: APIBase {
 
     /**
      Update user photo
-     - PUT /v0.5/users/me/photo
+     - PUT /v0.6/users/me/photo
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -1336,7 +1336,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func usersPutUserPhotoWithRequestBuilder(request: PutUserPhotoRequest) -> RequestBuilder<Object> {
-        let path = "/v0.5/users/me/photo"
+        let path = "/v0.6/users/me/photo"
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
  
@@ -1362,7 +1362,7 @@ open class UsersAPI: APIBase {
 
     /**
      Update user visibility
-     - PUT /v0.5/users/me/visibility
+     - PUT /v0.6/users/me/visibility
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -1373,7 +1373,7 @@ open class UsersAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func usersPutUserVisibilityWithRequestBuilder(request: PutUserVisibilityRequest) -> RequestBuilder<Object> {
-        let path = "/v0.5/users/me/visibility"
+        let path = "/v0.6/users/me/visibility"
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
  

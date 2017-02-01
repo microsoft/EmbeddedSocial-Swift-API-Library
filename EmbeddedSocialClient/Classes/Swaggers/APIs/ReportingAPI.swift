@@ -26,7 +26,7 @@ open class ReportingAPI: APIBase {
 
     /**
      Report a comment as spam, offensive, etc.
-     - POST /v0.5/comments/{commentHandle}/reports
+     - POST /v0.6/comments/{commentHandle}/reports
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -38,7 +38,7 @@ open class ReportingAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func commentReportsPostReportWithRequestBuilder(commentHandle: String, postReportRequest: PostReportRequest) -> RequestBuilder<Object> {
-        var path = "/v0.5/comments/{commentHandle}/reports"
+        var path = "/v0.6/comments/{commentHandle}/reports"
         path = path.replacingOccurrences(of: "{commentHandle}", with: "\(commentHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = postReportRequest.encodeToJSON() as? [String:AnyObject]
@@ -66,7 +66,7 @@ open class ReportingAPI: APIBase {
 
     /**
      Report a reply as spam, offensive, etc.
-     - POST /v0.5/replies/{replyHandle}/reports
+     - POST /v0.6/replies/{replyHandle}/reports
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -78,7 +78,7 @@ open class ReportingAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func replyReportsPostReportWithRequestBuilder(replyHandle: String, postReportRequest: PostReportRequest) -> RequestBuilder<Object> {
-        var path = "/v0.5/replies/{replyHandle}/reports"
+        var path = "/v0.6/replies/{replyHandle}/reports"
         path = path.replacingOccurrences(of: "{replyHandle}", with: "\(replyHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = postReportRequest.encodeToJSON() as? [String:AnyObject]
@@ -106,7 +106,7 @@ open class ReportingAPI: APIBase {
 
     /**
      Report a topic as spam, offensive, etc.
-     - POST /v0.5/topics/{topicHandle}/reports
+     - POST /v0.6/topics/{topicHandle}/reports
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -118,7 +118,7 @@ open class ReportingAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func topicReportsPostReportWithRequestBuilder(topicHandle: String, postReportRequest: PostReportRequest) -> RequestBuilder<Object> {
-        var path = "/v0.5/topics/{topicHandle}/reports"
+        var path = "/v0.6/topics/{topicHandle}/reports"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = postReportRequest.encodeToJSON() as? [String:AnyObject]
@@ -146,7 +146,7 @@ open class ReportingAPI: APIBase {
 
     /**
      Report a user as spam, offensive, etc.
-     - POST /v0.5/users/{userHandle}/reports
+     - POST /v0.6/users/{userHandle}/reports
      - This call allows a user to complain about another user's profile content              (photo, bio, name) as containing spam, offensive material, etc.
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
@@ -159,7 +159,7 @@ open class ReportingAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func userReportsPostReportWithRequestBuilder(userHandle: String, postReportRequest: PostReportRequest) -> RequestBuilder<Object> {
-        var path = "/v0.5/users/{userHandle}/reports"
+        var path = "/v0.6/users/{userHandle}/reports"
         path = path.replacingOccurrences(of: "{userHandle}", with: "\(userHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = postReportRequest.encodeToJSON() as? [String:AnyObject]

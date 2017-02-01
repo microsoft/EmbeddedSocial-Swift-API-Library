@@ -25,7 +25,7 @@ open class CommentsAPI: APIBase {
 
     /**
      Delete comment
-     - DELETE /v0.5/comments/{commentHandle}
+     - DELETE /v0.6/comments/{commentHandle}
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -36,7 +36,7 @@ open class CommentsAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func commentsDeleteCommentWithRequestBuilder(commentHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.5/comments/{commentHandle}"
+        var path = "/v0.6/comments/{commentHandle}"
         path = path.replacingOccurrences(of: "{commentHandle}", with: "\(commentHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -66,7 +66,7 @@ open class CommentsAPI: APIBase {
 
     /**
      Get comment
-     - GET /v0.5/comments/{commentHandle}
+     - GET /v0.6/comments/{commentHandle}
      - examples: [{contentType=application/json, example={
   "topicHandle" : "aeiou",
   "blobUrl" : "aeiou",
@@ -149,7 +149,7 @@ open class CommentsAPI: APIBase {
      - returns: RequestBuilder<CommentView> 
      */
     open class func commentsGetCommentWithRequestBuilder(commentHandle: String) -> RequestBuilder<CommentView> {
-        var path = "/v0.5/comments/{commentHandle}"
+        var path = "/v0.6/comments/{commentHandle}"
         path = path.replacingOccurrences(of: "{commentHandle}", with: "\(commentHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -181,7 +181,7 @@ open class CommentsAPI: APIBase {
 
     /**
      Get comments for a topic
-     - GET /v0.5/topics/{topicHandle}/comments
+     - GET /v0.6/topics/{topicHandle}/comments
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -248,7 +248,7 @@ open class CommentsAPI: APIBase {
      - returns: RequestBuilder<FeedResponseCommentView> 
      */
     open class func topicCommentsGetTopicCommentsWithRequestBuilder(topicHandle: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseCommentView> {
-        var path = "/v0.5/topics/{topicHandle}/comments"
+        var path = "/v0.6/topics/{topicHandle}/comments"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -282,7 +282,7 @@ open class CommentsAPI: APIBase {
 
     /**
      Create a new comment
-     - POST /v0.5/topics/{topicHandle}/comments
+     - POST /v0.6/topics/{topicHandle}/comments
      - examples: [{contentType=application/json, example={
   "commentHandle" : "aeiou"
 }}, {contentType=application/xml, example=<null>
@@ -300,7 +300,7 @@ open class CommentsAPI: APIBase {
      - returns: RequestBuilder<PostCommentResponse> 
      */
     open class func topicCommentsPostCommentWithRequestBuilder(topicHandle: String, request: PostCommentRequest) -> RequestBuilder<PostCommentResponse> {
-        var path = "/v0.5/topics/{topicHandle}/comments"
+        var path = "/v0.6/topics/{topicHandle}/comments"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
