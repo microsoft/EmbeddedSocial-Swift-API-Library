@@ -25,7 +25,7 @@ open class ImagesAPI: APIBase {
 
     /**
      Get image
-     - GET /v0.5/images/{blobHandle}
+     - GET /v0.6/images/{blobHandle}
      - examples: [{output=none}]
      
      - parameter blobHandle: (path) Blob handle 
@@ -33,7 +33,7 @@ open class ImagesAPI: APIBase {
      - returns: RequestBuilder<URL> 
      */
     open class func imagesGetImageWithRequestBuilder(blobHandle: String) -> RequestBuilder<URL> {
-        var path = "/v0.5/images/{blobHandle}"
+        var path = "/v0.6/images/{blobHandle}"
         path = path.replacingOccurrences(of: "{blobHandle}", with: "\(blobHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -73,7 +73,7 @@ open class ImagesAPI: APIBase {
 
     /**
      Upload a new image
-     - POST /v0.5/images/{imageType}
+     - POST /v0.6/images/{imageType}
      - Images will be resized. To access a resized image, append the 1 character size identifier to the blobHandle that is returned.                             - d is 25 pixels wide               - h is 50 pixels wide               - l is 100 pixels wide               - p is 250 pixels wide               - t is 500 pixels wide               - x is 1000 pixels wide                             - ImageType.UserPhoto supports d,h,l,p,t,x               - ImageType.ContentBlob supports d,h,l,p,t,x               - ImageType.AppIcon supports l                             All resized images will maintain their aspect ratio. Any orientation specified in the EXIF headers will be honored.
      - examples: [{contentType=application/json, example={
   "blobHandle" : "aeiou"
@@ -92,7 +92,7 @@ open class ImagesAPI: APIBase {
      - returns: RequestBuilder<PostImageResponse> 
      */
     open class func imagesPostImageWithRequestBuilder(imageType: ImageType_imagesPostImage, image: Data) -> RequestBuilder<PostImageResponse> {
-        var path = "/v0.5/images/{imageType}"
+        var path = "/v0.6/images/{imageType}"
         path = path.replacingOccurrences(of: "{imageType}", with: "\(imageType.rawValue)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = image.encodeToJSON() as? [String:AnyObject]

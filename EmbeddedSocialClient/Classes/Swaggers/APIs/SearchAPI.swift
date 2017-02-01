@@ -27,7 +27,7 @@ open class SearchAPI: APIBase {
 
     /**
      Search topics with a query
-     - GET /v0.5/search/topics
+     - GET /v0.6/search/topics
      - The query string will be searched across hashtags, topic titles, and topic texts,               and matching results will be returned.                             If the query string contains only hashtags, e.g. #foo #bar, then only the hashtags               in topics will be searched.                             Query string supports the following operators:               - suffix: \"foo*\"               - and: \"foo+bar\"               - or: \"foo|bar\"               - not: \"-foo\"               - phrase: \"\"foo bar\"\"               - precedence: \"foo+(bar|baz)\"               You need to escape * if it is at the end of a word, and - if it is at the start of a word.               Default behavior is to use and, so if you use whitespace to separate words,               such as \"foo bar\", that is equivalent to \"foo+bar\".
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
@@ -123,7 +123,7 @@ open class SearchAPI: APIBase {
      - returns: RequestBuilder<FeedResponseTopicView> 
      */
     open class func searchGetTopicsWithRequestBuilder(query: String, cursor: Int32? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
-        let path = "/v0.5/search/topics"
+        let path = "/v0.6/search/topics"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [
@@ -158,7 +158,7 @@ open class SearchAPI: APIBase {
 
     /**
      Search users with a query
-     - GET /v0.5/search/users
+     - GET /v0.6/search/users
      - The query string will be searched across the full name of users               and matching results will be returned.                             Query string supports the following operators:               - suffix: \"foo*\"               - and: \"foo+bar\"               - or: \"foo|bar\"               - not: \"-foo\"               - phrase: \"\"foo bar\"\"               - precedence: \"foo+(bar|baz)\"               You need to escape * if it is at the end of a word, and - if it is at the start of a word.               Default behavior is to use and, so if you use whitespace to separate words,               such as \"foo bar\", that is equivalent to \"foo+bar\".
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
@@ -196,7 +196,7 @@ open class SearchAPI: APIBase {
      - returns: RequestBuilder<FeedResponseUserCompactView> 
      */
     open class func searchGetUsersWithRequestBuilder(query: String, cursor: Int32? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseUserCompactView> {
-        let path = "/v0.5/search/users"
+        let path = "/v0.6/search/users"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [

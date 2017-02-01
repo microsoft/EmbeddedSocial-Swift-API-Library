@@ -26,7 +26,7 @@ open class NotificationsAPI: APIBase {
 
     /**
      Get my notifications
-     - GET /v0.5/users/me/notifications
+     - GET /v0.6/users/me/notifications
      - This gets a feed of activities.              This feed is time ordered, with the most recent activity first.              An activity is added to this feed when any user other than myself does one of the following 6 actions:              (a) creates a comment to my topic; (b) creates a reply to my comment; (c) likes my topic; (d) follows me;              (e) requests to follow me when I'm a private user; (f) accepts my request to follow them when they are a private user.              Each activity has an unread status, which is controlled by doing a PUT on the status API call.              If a user that performed the activity is deleted, then that activity will no longer appear in this feed.              If an activity is performed on content that is then deleted, that activity will no longer appear in this feed.              If a user has un-done an activity (e.g. unlike a previous like), then that activity will no longer appear in this feed.              When activityType is Like, the activityHandle is the likeHandle that uniquely identifies the new like.              When activityType is Comment, the activityHandle is the commentHandle that uniquely identifies the new comment.              When activityType is Reply, the activityHandle is the replyHandle that uniquely identifies the new reply.              ActivityType values of CommentPeer and ReplyPeer are currently not used.              When activityType is Following or FollowRequest or FollowAccept, the activityHandle is the relationshipHandle              that uniquely identifies the relationship between the two users.
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
@@ -115,7 +115,7 @@ open class NotificationsAPI: APIBase {
      - returns: RequestBuilder<FeedResponseActivityView> 
      */
     open class func myNotificationsGetNotificationsWithRequestBuilder(cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseActivityView> {
-        let path = "/v0.5/users/me/notifications"
+        let path = "/v0.6/users/me/notifications"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [
@@ -146,7 +146,7 @@ open class NotificationsAPI: APIBase {
 
     /**
      Get unread notifications count
-     - GET /v0.5/users/me/notifications/count
+     - GET /v0.6/users/me/notifications/count
      - This returns a count of activities in my notification feed that have an unread status of true.
      - examples: [{contentType=application/json, example={
   "count" : 123456789
@@ -162,7 +162,7 @@ open class NotificationsAPI: APIBase {
      - returns: RequestBuilder<CountResponse> 
      */
     open class func myNotificationsGetNotificationsCountWithRequestBuilder() -> RequestBuilder<CountResponse> {
-        let path = "/v0.5/users/me/notifications/count"
+        let path = "/v0.6/users/me/notifications/count"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [:]
@@ -191,7 +191,7 @@ open class NotificationsAPI: APIBase {
 
     /**
      Update notifications status
-     - PUT /v0.5/users/me/notifications/status
+     - PUT /v0.6/users/me/notifications/status
      - This API call records the most recent notification that the user has read (or seen).              In the GET notifications API call, each notification will have an unread status.              Any notifications that are newer than this ReadActivityHandle will have an unread status of true.              Any notifications that correspond to this ReadActivityHandle or older will have an unread status of false.              If this API call has never been made, then all notifications will have an unread status of true.
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
@@ -203,7 +203,7 @@ open class NotificationsAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func myNotificationsPutNotificationsStatusWithRequestBuilder(request: PutNotificationsStatusRequest) -> RequestBuilder<Object> {
-        let path = "/v0.5/users/me/notifications/status"
+        let path = "/v0.6/users/me/notifications/status"
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
  

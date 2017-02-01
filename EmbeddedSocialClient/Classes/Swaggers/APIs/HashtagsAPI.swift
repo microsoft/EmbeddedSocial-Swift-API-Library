@@ -25,7 +25,7 @@ open class HashtagsAPI: APIBase {
 
     /**
      Get autocompleted hashtags
-     - GET /v0.5/hashtags/autocomplete
+     - GET /v0.6/hashtags/autocomplete
      - The query string must be at least 3 characters long, and no more than 25 characters long.
      - examples: [{contentType=application/json, example=[ "aeiou" ]}, {contentType=application/xml, example=string}]
      - examples: [{contentType=application/json, example=[ "aeiou" ]}, {contentType=application/xml, example=string}]
@@ -35,7 +35,7 @@ open class HashtagsAPI: APIBase {
      - returns: RequestBuilder<[String]> 
      */
     open class func hashtagsGetAutocompletedHashtagsWithRequestBuilder(query: String) -> RequestBuilder<[String]> {
-        let path = "/v0.5/hashtags/autocomplete"
+        let path = "/v0.6/hashtags/autocomplete"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [
@@ -65,14 +65,14 @@ open class HashtagsAPI: APIBase {
 
     /**
      Get trending hashtags
-     - GET /v0.5/hashtags/trending
+     - GET /v0.6/hashtags/trending
      - examples: [{contentType=application/json, example=[ "aeiou" ]}, {contentType=application/xml, example=string}]
      - examples: [{contentType=application/json, example=[ "aeiou" ]}, {contentType=application/xml, example=string}]
 
      - returns: RequestBuilder<[String]> 
      */
     open class func hashtagsGetTrendingHashtagsWithRequestBuilder() -> RequestBuilder<[String]> {
-        let path = "/v0.5/hashtags/trending"
+        let path = "/v0.6/hashtags/trending"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [:]

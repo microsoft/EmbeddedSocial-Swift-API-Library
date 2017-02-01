@@ -24,7 +24,7 @@ open class BuildsAPI: APIBase {
 
     /**
      The build information for this service
-     - GET /v0.5/builds/current
+     - GET /v0.6/builds/current
      - This API is meant to be called by humans for debugging
      - examples: [{contentType=application/json, example={
   "hostname" : "aeiou",
@@ -56,7 +56,7 @@ open class BuildsAPI: APIBase {
      - returns: RequestBuilder<BuildsCurrentResponse> 
      */
     open class func buildsGetBuildsCurrentWithRequestBuilder() -> RequestBuilder<BuildsCurrentResponse> {
-        let path = "/v0.5/builds/current"
+        let path = "/v0.6/builds/current"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [:]

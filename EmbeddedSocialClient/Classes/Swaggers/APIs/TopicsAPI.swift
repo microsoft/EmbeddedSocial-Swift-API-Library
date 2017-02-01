@@ -25,7 +25,7 @@ open class TopicsAPI: APIBase {
 
     /**
      Delete topic
-     - DELETE /v0.5/topics/{topicHandle}
+     - DELETE /v0.6/topics/{topicHandle}
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -36,7 +36,7 @@ open class TopicsAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func topicsDeleteTopicWithRequestBuilder(topicHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.5/topics/{topicHandle}"
+        var path = "/v0.6/topics/{topicHandle}"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -67,7 +67,7 @@ open class TopicsAPI: APIBase {
 
     /**
      Delete a topic name
-     - DELETE /v0.5/topics/names/{topicName}
+     - DELETE /v0.6/topics/names/{topicName}
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -79,7 +79,7 @@ open class TopicsAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func topicsDeleteTopicNameWithRequestBuilder(topicName: String, request: DeleteTopicNameRequest) -> RequestBuilder<Object> {
-        var path = "/v0.5/topics/names/{topicName}"
+        var path = "/v0.6/topics/names/{topicName}"
         path = path.replacingOccurrences(of: "{topicName}", with: "\(topicName)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
@@ -107,7 +107,7 @@ open class TopicsAPI: APIBase {
 
     /**
      Get featured topics
-     - GET /v0.5/topics/featured
+     - GET /v0.6/topics/featured
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -201,7 +201,7 @@ open class TopicsAPI: APIBase {
      - returns: RequestBuilder<FeedResponseTopicView> 
      */
     open class func topicsGetFeaturedTopicsWithRequestBuilder(cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
-        let path = "/v0.5/topics/featured"
+        let path = "/v0.6/topics/featured"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [
@@ -245,7 +245,7 @@ open class TopicsAPI: APIBase {
 
     /**
      Get popular topics today
-     - GET /v0.5/topics/popular/{timeRange}
+     - GET /v0.6/topics/popular/{timeRange}
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -340,7 +340,7 @@ open class TopicsAPI: APIBase {
      - returns: RequestBuilder<FeedResponseTopicView> 
      */
     open class func topicsGetPopularTopicsWithRequestBuilder(timeRange: TimeRange_topicsGetPopularTopics, cursor: Int32? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
-        var path = "/v0.5/topics/popular/{timeRange}"
+        var path = "/v0.6/topics/popular/{timeRange}"
         path = path.replacingOccurrences(of: "{timeRange}", with: "\(timeRange.rawValue)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -373,7 +373,7 @@ open class TopicsAPI: APIBase {
 
     /**
      Get topic
-     - GET /v0.5/topics/{topicHandle}
+     - GET /v0.6/topics/{topicHandle}
      - examples: [{contentType=application/json, example={
   "app" : {
     "deepLink" : "aeiou",
@@ -496,7 +496,7 @@ open class TopicsAPI: APIBase {
      - returns: RequestBuilder<TopicView> 
      */
     open class func topicsGetTopicWithRequestBuilder(topicHandle: String) -> RequestBuilder<TopicView> {
-        var path = "/v0.5/topics/{topicHandle}"
+        var path = "/v0.6/topics/{topicHandle}"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -535,7 +535,7 @@ open class TopicsAPI: APIBase {
 
     /**
      Get a topic name
-     - GET /v0.5/topics/names/{topicName}
+     - GET /v0.6/topics/names/{topicName}
      - examples: [{contentType=application/json, example={
   "topicHandle" : "aeiou"
 }}, {contentType=application/xml, example=<null>
@@ -553,7 +553,7 @@ open class TopicsAPI: APIBase {
      - returns: RequestBuilder<GetTopicNameResponse> 
      */
     open class func topicsGetTopicNameWithRequestBuilder(topicName: String, publisherType: PublisherType_topicsGetTopicName) -> RequestBuilder<GetTopicNameResponse> {
-        var path = "/v0.5/topics/names/{topicName}"
+        var path = "/v0.6/topics/names/{topicName}"
         path = path.replacingOccurrences(of: "{topicName}", with: "\(topicName)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -586,7 +586,7 @@ open class TopicsAPI: APIBase {
 
     /**
      Get recent topics
-     - GET /v0.5/topics
+     - GET /v0.6/topics
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -680,7 +680,7 @@ open class TopicsAPI: APIBase {
      - returns: RequestBuilder<FeedResponseTopicView> 
      */
     open class func topicsGetTopicsWithRequestBuilder(cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
-        let path = "/v0.5/topics"
+        let path = "/v0.6/topics"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [
@@ -712,7 +712,7 @@ open class TopicsAPI: APIBase {
 
     /**
      Create a new topic
-     - POST /v0.5/topics
+     - POST /v0.6/topics
      - examples: [{contentType=application/json, example={
   "topicHandle" : "aeiou"
 }}, {contentType=application/xml, example=<null>
@@ -729,7 +729,7 @@ open class TopicsAPI: APIBase {
      - returns: RequestBuilder<PostTopicResponse> 
      */
     open class func topicsPostTopicWithRequestBuilder(request: PostTopicRequest) -> RequestBuilder<PostTopicResponse> {
-        let path = "/v0.5/topics"
+        let path = "/v0.6/topics"
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
  
@@ -755,7 +755,7 @@ open class TopicsAPI: APIBase {
 
     /**
      Create a topic name
-     - POST /v0.5/topics/names
+     - POST /v0.6/topics/names
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -766,7 +766,7 @@ open class TopicsAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func topicsPostTopicNameWithRequestBuilder(request: PostTopicNameRequest) -> RequestBuilder<Object> {
-        let path = "/v0.5/topics/names"
+        let path = "/v0.6/topics/names"
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
  
@@ -793,7 +793,7 @@ open class TopicsAPI: APIBase {
 
     /**
      Update topic
-     - PUT /v0.5/topics/{topicHandle}
+     - PUT /v0.6/topics/{topicHandle}
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -805,7 +805,7 @@ open class TopicsAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func topicsPutTopicWithRequestBuilder(topicHandle: String, request: PutTopicRequest) -> RequestBuilder<Object> {
-        var path = "/v0.5/topics/{topicHandle}"
+        var path = "/v0.6/topics/{topicHandle}"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
@@ -833,7 +833,7 @@ open class TopicsAPI: APIBase {
 
     /**
      Update a topic name
-     - PUT /v0.5/topics/names/{topicName}
+     - PUT /v0.6/topics/names/{topicName}
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -845,7 +845,7 @@ open class TopicsAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func topicsPutTopicNameWithRequestBuilder(topicName: String, request: PutTopicNameRequest) -> RequestBuilder<Object> {
-        var path = "/v0.5/topics/names/{topicName}"
+        var path = "/v0.6/topics/names/{topicName}"
         path = path.replacingOccurrences(of: "{topicName}", with: "\(topicName)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]

@@ -37,7 +37,7 @@ open class SessionsAPI: APIBase {
 
     /**
      Get request token
-     - GET /v0.5/request_tokens/{identityProvider}
+     - GET /v0.6/request_tokens/{identityProvider}
      - examples: [{contentType=application/json, example={
   "requestToken" : "aeiou"
 }}, {contentType=application/xml, example=<null>
@@ -54,7 +54,7 @@ open class SessionsAPI: APIBase {
      - returns: RequestBuilder<GetRequestTokenResponse> 
      */
     open class func requestTokensGetRequestTokenWithRequestBuilder(identityProvider: IdentityProvider_requestTokensGetRequestToken) -> RequestBuilder<GetRequestTokenResponse> {
-        var path = "/v0.5/request_tokens/{identityProvider}"
+        var path = "/v0.6/request_tokens/{identityProvider}"
         path = path.replacingOccurrences(of: "{identityProvider}", with: "\(identityProvider.rawValue)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
@@ -83,7 +83,7 @@ open class SessionsAPI: APIBase {
 
     /**
      Delete the current session (sign out)
-     - DELETE /v0.5/sessions/current
+     - DELETE /v0.6/sessions/current
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
@@ -92,7 +92,7 @@ open class SessionsAPI: APIBase {
      - returns: RequestBuilder<Object> 
      */
     open class func sessionsDeleteSessionWithRequestBuilder() -> RequestBuilder<Object> {
-        let path = "/v0.5/sessions/current"
+        let path = "/v0.6/sessions/current"
         let URLString = EmbeddedSocialClientAPI.basePath + path
 
         let nillableParameters: [String:Any?] = [:]
@@ -121,7 +121,7 @@ open class SessionsAPI: APIBase {
 
     /**
      Create a new session (sign in)
-     - POST /v0.5/sessions
+     - POST /v0.6/sessions
      - examples: [{contentType=application/json, example={
   "userHandle" : "aeiou",
   "sessionToken" : "aeiou"
@@ -142,7 +142,7 @@ open class SessionsAPI: APIBase {
      - returns: RequestBuilder<PostSessionResponse> 
      */
     open class func sessionsPostSessionWithRequestBuilder(request: PostSessionRequest) -> RequestBuilder<PostSessionResponse> {
-        let path = "/v0.5/sessions"
+        let path = "/v0.6/sessions"
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
  
