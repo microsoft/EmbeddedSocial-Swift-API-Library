@@ -7,3 +7,8 @@ target 'EmbeddedSocialClient' do
   pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :tag => '4.0.0'
   pod 'EmbeddedSocialClient', :path => 'EmbeddedSocialClient.podspec'
 end
+
+target 'EmbeddedSocialClientTests' do
+  use_frameworks!
+  inherit! :search_paths
+end

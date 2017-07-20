@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10CB59A8CB005D588DA77543 /* Pods_EmbeddedSocialClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 759F48EE3269A3D8C0344D63 /* Pods_EmbeddedSocialClientTests.framework */; };
 		6F5B44481F21511200FE6092 /* EmbeddedSocialClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5B443E1F21511200FE6092 /* EmbeddedSocialClient.framework */; };
 		6F5B444D1F21511200FE6092 /* EmbeddedSocialClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5B444C1F21511200FE6092 /* EmbeddedSocialClientTests.swift */; };
 		6FC066481F2151C4003746BB /* AlamofireImplementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066011F2151C4003746BB /* AlamofireImplementations.swift */; };
@@ -93,6 +94,7 @@
 
 /* Begin PBXFileReference section */
 		09B7CF8FBE3FE328067A3F20 /* Pods-EmbeddedSocialClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmbeddedSocialClient.release.xcconfig"; path = "../Pods/Target Support Files/Pods-EmbeddedSocialClient/Pods-EmbeddedSocialClient.release.xcconfig"; sourceTree = "<group>"; };
+		48CF652B9D55B2886754B21D /* Pods-EmbeddedSocialClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmbeddedSocialClientTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-EmbeddedSocialClientTests/Pods-EmbeddedSocialClientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6F5B443E1F21511200FE6092 /* EmbeddedSocialClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EmbeddedSocialClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F5B44421F21511200FE6092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F5B44471F21511200FE6092 /* EmbeddedSocialClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmbeddedSocialClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,8 +169,10 @@
 		6FC066451F2151C4003746BB /* UserCompactView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCompactView.swift; sourceTree = "<group>"; };
 		6FC066461F2151C4003746BB /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		6FC066471F2151C4003746BB /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		759F48EE3269A3D8C0344D63 /* Pods_EmbeddedSocialClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmbeddedSocialClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		778EFBA489D0AA3A50F921E2 /* Pods-EmbeddedSocialClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmbeddedSocialClient.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-EmbeddedSocialClient/Pods-EmbeddedSocialClient.debug.xcconfig"; sourceTree = "<group>"; };
 		C569334B6D7EFFD8CE780404 /* Pods_EmbeddedSocialClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmbeddedSocialClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E274F0FF26A8850FEBE5B9C9 /* Pods-EmbeddedSocialClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmbeddedSocialClientTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-EmbeddedSocialClientTests/Pods-EmbeddedSocialClientTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F5B44481F21511200FE6092 /* EmbeddedSocialClient.framework in Frameworks */,
+				10CB59A8CB005D588DA77543 /* Pods_EmbeddedSocialClientTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +201,8 @@
 			children = (
 				778EFBA489D0AA3A50F921E2 /* Pods-EmbeddedSocialClient.debug.xcconfig */,
 				09B7CF8FBE3FE328067A3F20 /* Pods-EmbeddedSocialClient.release.xcconfig */,
+				48CF652B9D55B2886754B21D /* Pods-EmbeddedSocialClientTests.debug.xcconfig */,
+				E274F0FF26A8850FEBE5B9C9 /* Pods-EmbeddedSocialClientTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -342,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				C569334B6D7EFFD8CE780404 /* Pods_EmbeddedSocialClient.framework */,
+				759F48EE3269A3D8C0344D63 /* Pods_EmbeddedSocialClientTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -383,9 +391,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F5B44551F21511200FE6092 /* Build configuration list for PBXNativeTarget "EmbeddedSocialClientTests" */;
 			buildPhases = (
+				6151BBB4B5EB95B71C02315A /* [CP] Check Pods Manifest.lock */,
 				6F5B44431F21511200FE6092 /* Sources */,
 				6F5B44441F21511200FE6092 /* Frameworks */,
 				6F5B44451F21511200FE6092 /* Resources */,
+				9E9BEEF1CDE103FC88A48639 /* [CP] Embed Pods Frameworks */,
+				BF17BD322AAA6A290F230F22 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -455,6 +466,51 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6151BBB4B5EB95B71C02315A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		9E9BEEF1CDE103FC88A48639 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-EmbeddedSocialClientTests/Pods-EmbeddedSocialClientTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF17BD322AAA6A290F230F22 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-EmbeddedSocialClientTests/Pods-EmbeddedSocialClientTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D9FD94556B3F579E55A0C1F4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -726,8 +782,9 @@
 		};
 		6F5B44561F21511200FE6092 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48CF652B9D55B2886754B21D /* Pods-EmbeddedSocialClientTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				DEVELOPMENT_TEAM = UBF8T346G9;
 				INFOPLIST_FILE = EmbeddedSocialClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -739,8 +796,9 @@
 		};
 		6F5B44571F21511200FE6092 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E274F0FF26A8850FEBE5B9C9 /* Pods-EmbeddedSocialClientTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				DEVELOPMENT_TEAM = UBF8T346G9;
 				INFOPLIST_FILE = EmbeddedSocialClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
