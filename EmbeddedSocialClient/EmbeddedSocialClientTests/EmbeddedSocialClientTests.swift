@@ -97,4 +97,45 @@ class EmbeddedSocialClientTests: XCTestCase {
             }
         }
     }
+    
+    // Test the PostImage API call
+    func testPostImage() {
+        let expectation = self.expectation(description: "testPostImage")
+        
+        // setup the client interface
+        let appKey = "XX"
+        let token = "XX"
+        EmbeddedSocialClientAPI.basePath = "https://ppe.embeddedsocial.microsoft.com"
+        EmbeddedSocialClientAPI.customHeaders = ["Authorization":"Google AK=\(appKey)|TK=\(token)"]
+        
+        // load an image into memory
+        guard let imageData = UIImagePNGRepresentation(UIImage(named: "image_2000")!) else {
+            XCTFail("not able to load image")
+            return
+        }
+        
+        // issue the API call
+        ImagesAPI.imagesPostImage(imageType: ImagesAPI.ImageType_imagesPostImage.contentBlob, image: imageData) { (postImageResponse: PostImageResponse?, error: Error?) in
+            if let error = error {
+                XCTFail("error posting new image : \(error.localizedDescription)")
+                return
+            }
+            
+            guard let postImageResponse = postImageResponse else {
+                XCTFail("did not get post image response")
+                return
+            }
+            
+            XCTAssert(postImageResponse.blobHandle != nil)
+            XCTAssert(!postImageResponse.blobHandle!.isEmpty)
+            print("new blob handle is \(postImageResponse.blobHandle!)")
+            expectation.fulfill()
+        }
+        
+        self.waitForExpectations(timeout: testTimeout) { error in
+            if let error = error {
+                XCTFail("waitForExpectations errored: \(error)")
+            }
+        }
+    }
 }
