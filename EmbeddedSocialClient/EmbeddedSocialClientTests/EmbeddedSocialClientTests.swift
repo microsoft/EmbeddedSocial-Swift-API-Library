@@ -11,6 +11,8 @@ import XCTest
 
 class EmbeddedSocialClientTests: XCTestCase {
     
+    let testTimeout = 10.0
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -21,19 +23,33 @@ class EmbeddedSocialClientTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testGetBuildsCurrent() {
+        let expectation = self.expectation(description: "testGetBuildsCurrent")
         
-        XCTAssert(false)
+        // let appKey = "xx"
+        // EmbeddedSocialClientAPI.customHeaders = ["Authorization" : "Anon AK=\(appKey)"]
+        EmbeddedSocialClientAPI.basePath = "https://ppe.embeddedsocial.microsoft.com"
+        BuildsAPI.buildsGetBuildsCurrent { (buildsCurrentResponse: BuildsCurrentResponse?, error: Error?) in
+            if let error = error {
+                XCTFail("error getting builds info : \(error.localizedDescription)")
+                return
+            }
+
+            guard let buildsCurrentResponse = buildsCurrentResponse else {
+                XCTFail("did not get builds current response")
+                return
+            }
+            
+            XCTAssert(buildsCurrentResponse.commitHash != nil)
+            XCTAssert(!buildsCurrentResponse.commitHash!.isEmpty)
+            print("commit hash is \(buildsCurrentResponse.commitHash!)")
+            expectation.fulfill()
+        }
         
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        self.waitForExpectations(timeout: testTimeout) { error in
+            if let error = error {
+                XCTFail("waitForExpectations errored: \(error)")
+            }
         }
     }
-    
 }
