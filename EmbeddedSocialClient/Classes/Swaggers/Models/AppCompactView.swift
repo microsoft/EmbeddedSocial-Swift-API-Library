@@ -10,6 +10,7 @@ import Foundation
 
 /** App compact view */
 open class AppCompactView: JSONEncodable {
+
     public enum PlatformType: String { 
         case windows = "Windows"
         case android = "Android"
@@ -39,6 +40,7 @@ open class AppCompactView: JSONEncodable {
         nillableDictionary["platformType"] = self.platformType?.rawValue
         nillableDictionary["deepLink"] = self.deepLink
         nillableDictionary["storeLink"] = self.storeLink
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

@@ -10,6 +10,7 @@ import Foundation
 
 /** Request to post (create) session */
 open class PostSessionRequest: JSONEncodable {
+
     /** Gets or sets instance id -- Unique installation id of the app */
     public var instanceId: String?
     /** Gets or sets user handle */
@@ -22,6 +23,7 @@ open class PostSessionRequest: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["instanceId"] = self.instanceId
         nillableDictionary["userHandle"] = self.userHandle
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

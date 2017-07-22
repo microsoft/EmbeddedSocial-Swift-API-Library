@@ -5,69 +5,65 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
-
 
 
 open class BuildsAPI: APIBase {
     /**
      The build information for this service
-     
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func buildsGetBuildsCurrent(completion: @escaping ((_ data: BuildsCurrentResponse?,_ error: Error?) -> Void)) {
+    open class func buildsGetBuildsCurrent(completion: @escaping ((_ data: BuildsCurrentResponse?, _ error: ErrorResponse?) -> Void)) {
         buildsGetBuildsCurrentWithRequestBuilder().execute { (response, error) -> Void in
-            completion(response?.body, error);
+            completion(response?.body, error)
         }
     }
 
 
     /**
      The build information for this service
-     - GET /v0.6/builds/current
+     - GET /v0.7/builds/current
      - This API is meant to be called by humans for debugging
-     - examples: [{contentType=application/json, example={
-  "hostname" : "aeiou",
-  "dateAndTime" : "aeiou",
-  "serviceApiVersion" : "aeiou",
-  "dirtyFiles" : [ "aeiou" ],
-  "commitHash" : "aeiou"
-}}, {contentType=application/xml, example=<null>
-  <dateAndTime>string</dateAndTime>
-  <commitHash>string</commitHash>
-  <hostname>string</hostname>
-  <serviceApiVersion>string</serviceApiVersion>
-  <dirtyFiles>string</dirtyFiles>
-</null>}]
-     - examples: [{contentType=application/json, example={
-  "hostname" : "aeiou",
-  "dateAndTime" : "aeiou",
-  "serviceApiVersion" : "aeiou",
-  "dirtyFiles" : [ "aeiou" ],
-  "commitHash" : "aeiou"
-}}, {contentType=application/xml, example=<null>
-  <dateAndTime>string</dateAndTime>
-  <commitHash>string</commitHash>
-  <hostname>string</hostname>
-  <serviceApiVersion>string</serviceApiVersion>
-  <dirtyFiles>string</dirtyFiles>
-</null>}]
 
+     - examples: [{contentType=application/json, example={
+  "hostname" : "aeiou",
+  "dateAndTime" : "aeiou",
+  "serviceApiVersion" : "aeiou",
+  "dirtyFiles" : [ "aeiou" ],
+  "commitHash" : "aeiou"
+}}, {contentType=application/xml, example=<null>
+  <dateAndTime>aeiou</dateAndTime>
+  <commitHash>aeiou</commitHash>
+  <hostname>aeiou</hostname>
+  <serviceApiVersion>aeiou</serviceApiVersion>
+  <dirtyFiles>aeiou</dirtyFiles>
+</null>}]
+     - examples: [{contentType=application/json, example={
+  "hostname" : "aeiou",
+  "dateAndTime" : "aeiou",
+  "serviceApiVersion" : "aeiou",
+  "dirtyFiles" : [ "aeiou" ],
+  "commitHash" : "aeiou"
+}}, {contentType=application/xml, example=<null>
+  <dateAndTime>aeiou</dateAndTime>
+  <commitHash>aeiou</commitHash>
+  <hostname>aeiou</hostname>
+  <serviceApiVersion>aeiou</serviceApiVersion>
+  <dirtyFiles>aeiou</dirtyFiles>
+</null>}]
      - returns: RequestBuilder<BuildsCurrentResponse> 
      */
     open class func buildsGetBuildsCurrentWithRequestBuilder() -> RequestBuilder<BuildsCurrentResponse> {
-        let path = "/v0.6/builds/current"
+        let path = "/v0.7/builds/current"
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [:]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let url = NSURLComponents(string: URLString)
+
         let requestBuilder: RequestBuilder<BuildsCurrentResponse>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false)
     }
 
 }

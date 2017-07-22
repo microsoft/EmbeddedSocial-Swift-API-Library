@@ -10,6 +10,7 @@ import Foundation
 
 /** Request to post (create) topic */
 open class PostTopicRequest: JSONEncodable {
+
     public enum PublisherType: String { 
         case user = "User"
         case app = "App"
@@ -56,6 +57,7 @@ open class PostTopicRequest: JSONEncodable {
         nillableDictionary["deepLink"] = self.deepLink
         nillableDictionary["friendlyName"] = self.friendlyName
         nillableDictionary["group"] = self.group
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

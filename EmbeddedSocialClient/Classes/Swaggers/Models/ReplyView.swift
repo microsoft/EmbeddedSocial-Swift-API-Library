@@ -10,6 +10,7 @@ import Foundation
 
 /** Reply view */
 open class ReplyView: JSONEncodable {
+
     public enum ContentStatus: String { 
         case active = "Active"
         case banned = "Banned"
@@ -55,6 +56,7 @@ open class ReplyView: JSONEncodable {
         nillableDictionary["totalLikes"] = self.totalLikes?.encodeToJSON()
         nillableDictionary["liked"] = self.liked
         nillableDictionary["contentStatus"] = self.contentStatus?.rawValue
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

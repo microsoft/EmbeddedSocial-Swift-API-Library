@@ -10,6 +10,7 @@ import Foundation
 
 /** Activity view */
 open class ActivityView: JSONEncodable {
+
     public enum ActivityType: String { 
         case like = "Like"
         case comment = "Comment"
@@ -53,6 +54,7 @@ open class ActivityView: JSONEncodable {
         nillableDictionary["totalActions"] = self.totalActions?.encodeToJSON()
         nillableDictionary["unread"] = self.unread
         nillableDictionary["app"] = self.app?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

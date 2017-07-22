@@ -10,6 +10,7 @@ import Foundation
 
 /** Response from post (create) reply */
 open class PostReplyResponse: JSONEncodable {
+
     /** Gets or sets reply handle of the reply */
     public var replyHandle: String?
 
@@ -19,6 +20,7 @@ open class PostReplyResponse: JSONEncodable {
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["replyHandle"] = self.replyHandle
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

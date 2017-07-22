@@ -10,6 +10,7 @@ import Foundation
 
 /** Response from get builds current */
 open class BuildsCurrentResponse: JSONEncodable {
+
     /** Gets or sets the date and time of the current build */
     public var dateAndTime: String?
     /** Gets or sets the Git commit hash that represents the current checkout */
@@ -31,6 +32,7 @@ open class BuildsCurrentResponse: JSONEncodable {
         nillableDictionary["hostname"] = self.hostname
         nillableDictionary["serviceApiVersion"] = self.serviceApiVersion
         nillableDictionary["dirtyFiles"] = self.dirtyFiles?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

@@ -10,6 +10,7 @@ import Foundation
 
 /** Feed response */
 open class FeedResponseActivityView: JSONEncodable {
+
     /** Gets or sets feed data */
     public var data: [ActivityView]?
     /** Gets or sets feed cursor */
@@ -22,6 +23,7 @@ open class FeedResponseActivityView: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["data"] = self.data?.encodeToJSON()
         nillableDictionary["cursor"] = self.cursor
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

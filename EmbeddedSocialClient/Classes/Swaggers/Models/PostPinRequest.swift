@@ -10,6 +10,7 @@ import Foundation
 
 /** Request to post (create) a pin */
 open class PostPinRequest: JSONEncodable {
+
     /** Gets or sets topic handle */
     public var topicHandle: String?
 
@@ -19,6 +20,7 @@ open class PostPinRequest: JSONEncodable {
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["topicHandle"] = self.topicHandle
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

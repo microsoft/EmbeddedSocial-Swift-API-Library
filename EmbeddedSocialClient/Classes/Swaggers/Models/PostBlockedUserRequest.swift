@@ -10,6 +10,7 @@ import Foundation
 
 /** Request to post a blocked user (block user) */
 open class PostBlockedUserRequest: JSONEncodable {
+
     /** Gets or sets user handle */
     public var userHandle: String?
 
@@ -19,6 +20,7 @@ open class PostBlockedUserRequest: JSONEncodable {
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["userHandle"] = self.userHandle
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }
