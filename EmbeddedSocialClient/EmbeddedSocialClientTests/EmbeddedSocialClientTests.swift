@@ -18,7 +18,7 @@ class EmbeddedSocialClientTests: XCTestCase {
     let serverURL = "https://dev-sharad.embeddedsocial.microsoft.com"
     
     // which authorization to use for API calls that require authentication
-    let authorization = "XXXX"
+    let authorization = "XXX"
     
     // which images to use
     let myImageURL = URL(string: "https://i2.wp.com/sharadagarwaldotnet.files.wordpress.com/2016/02/sharad_suit_square2.jpg")
@@ -71,7 +71,6 @@ class EmbeddedSocialClientTests: XCTestCase {
         
         // setup the client interface
         EmbeddedSocialClientAPI.basePath = serverURL
-        EmbeddedSocialClientAPI.customHeaders = ["Authorization": authorization]
         
         // create a topic request
         let postTopicRequest = PostTopicRequest()
@@ -81,7 +80,7 @@ class EmbeddedSocialClientTests: XCTestCase {
         postTopicRequest.publisherType = PostTopicRequest.PublisherType.user
         
         // issue the API call
-        TopicsAPI.topicsPostTopic(request: postTopicRequest) { (postTopicResponse: PostTopicResponse?, error: Error?) in
+        TopicsAPI.topicsPostTopic(request: postTopicRequest, authorization: authorization) { (postTopicResponse: PostTopicResponse?, error: Error?) in
             if let error = error {
                 XCTFail("error posting new topic : \(error.localizedDescription)")
                 return
@@ -111,14 +110,13 @@ class EmbeddedSocialClientTests: XCTestCase {
         
         // setup the client interface
         EmbeddedSocialClientAPI.basePath = serverURL
-        EmbeddedSocialClientAPI.customHeaders = ["Authorization": authorization]
         
         // load an image into memory
         let myImageFile = #imageLiteral(resourceName: "sharad")
         let imageData = UIImageJPEGRepresentation(myImageFile, 1.0)
         
         // issue the API call
-        ImagesAPI.imagesPostImage(imageType: ImagesAPI.ImageType_imagesPostImage.contentBlob, image: imageData!) { (postImageResponse: PostImageResponse?, error: Error?) in
+        ImagesAPI.imagesPostImage(imageType: ImagesAPI.ImageType_imagesPostImage.contentBlob, authorization: authorization, image: imageData!) { (postImageResponse: PostImageResponse?, error: Error?) in
             if let error = error {
                 XCTFail("error posting new image : \(error.localizedDescription)")
                 return
@@ -148,7 +146,6 @@ class EmbeddedSocialClientTests: XCTestCase {
         
         // setup the client interface
         EmbeddedSocialClientAPI.basePath = serverURL
-        EmbeddedSocialClientAPI.customHeaders = ["Authorization": authorization]
         
         // load an image into memory
         let imageData : Data?
@@ -161,7 +158,7 @@ class EmbeddedSocialClientTests: XCTestCase {
         }
         
         // issue the API call
-        ImagesAPI.imagesPostImage(imageType: ImagesAPI.ImageType_imagesPostImage.contentBlob, image: imageData!) { (postImageResponse: PostImageResponse?, error: Error?) in
+        ImagesAPI.imagesPostImage(imageType: ImagesAPI.ImageType_imagesPostImage.contentBlob, authorization: authorization, image: imageData!) { (postImageResponse: PostImageResponse?, error: Error?) in
             if let error = error {
                 XCTFail("error posting new image : \(error.localizedDescription)")
                 return
