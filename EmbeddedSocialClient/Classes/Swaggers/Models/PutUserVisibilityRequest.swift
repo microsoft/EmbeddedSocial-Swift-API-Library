@@ -10,6 +10,7 @@ import Foundation
 
 /** Request to put (update) user visibility */
 open class PutUserVisibilityRequest: JSONEncodable {
+
     public enum Visibility: String { 
         case _public = "Public"
         case _private = "Private"
@@ -23,6 +24,7 @@ open class PutUserVisibilityRequest: JSONEncodable {
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["visibility"] = self.visibility?.rawValue
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

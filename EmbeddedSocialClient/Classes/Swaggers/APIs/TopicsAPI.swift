@@ -5,151 +5,157 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
-
 
 
 open class TopicsAPI: APIBase {
     /**
      Delete topic
-     
      - parameter topicHandle: (path) Topic handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicsDeleteTopic(topicHandle: String, completion: @escaping ((_ data: Object?,_ error: Error?) -> Void)) {
-        topicsDeleteTopicWithRequestBuilder(topicHandle: topicHandle).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicsDeleteTopic(topicHandle: String, authorization: String, completion: @escaping ((_ data: Object?, _ error: ErrorResponse?) -> Void)) {
+        topicsDeleteTopicWithRequestBuilder(topicHandle: topicHandle, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Delete topic
-     - DELETE /v0.6/topics/{topicHandle}
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     
-     - parameter topicHandle: (path) Topic handle 
+     - DELETE /v0.7/topics/{topicHandle}
 
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - parameter topicHandle: (path) Topic handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<Object> 
      */
-    open class func topicsDeleteTopicWithRequestBuilder(topicHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.6/topics/{topicHandle}"
+    open class func topicsDeleteTopicWithRequestBuilder(topicHandle: String, authorization: String) -> RequestBuilder<Object> {
+        var path = "/v0.7/topics/{topicHandle}"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [:]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<Object>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "DELETE", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
      Delete a topic name
-     
      - parameter topicName: (path) Topic name 
      - parameter request: (body) Delete topic request 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicsDeleteTopicName(topicName: String, request: DeleteTopicNameRequest, completion: @escaping ((_ data: Object?,_ error: Error?) -> Void)) {
-        topicsDeleteTopicNameWithRequestBuilder(topicName: topicName, request: request).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicsDeleteTopicName(topicName: String, request: DeleteTopicNameRequest, authorization: String, completion: @escaping ((_ data: Object?, _ error: ErrorResponse?) -> Void)) {
+        topicsDeleteTopicNameWithRequestBuilder(topicName: topicName, request: request, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Delete a topic name
-     - DELETE /v0.6/topics/names/{topicName}
+     - DELETE /v0.7/topics/names/{topicName}
+
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
-     
      - parameter topicName: (path) Topic name 
      - parameter request: (body) Delete topic request 
-
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<Object> 
      */
-    open class func topicsDeleteTopicNameWithRequestBuilder(topicName: String, request: DeleteTopicNameRequest) -> RequestBuilder<Object> {
-        var path = "/v0.6/topics/names/{topicName}"
+    open class func topicsDeleteTopicNameWithRequestBuilder(topicName: String, request: DeleteTopicNameRequest, authorization: String) -> RequestBuilder<Object> {
+        var path = "/v0.7/topics/names/{topicName}"
         path = path.replacingOccurrences(of: "{topicName}", with: "\(topicName)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<Object>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "DELETE", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**
      Get featured topics
-     
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter cursor: (query) Current read cursor (optional)
      - parameter limit: (query) Number of items to return (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicsGetFeaturedTopics(cursor: String? = nil, limit: Int32? = nil, completion: @escaping ((_ data: FeedResponseTopicView?,_ error: Error?) -> Void)) {
-        topicsGetFeaturedTopicsWithRequestBuilder(cursor: cursor, limit: limit).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicsGetFeaturedTopics(authorization: String, cursor: String? = nil, limit: Int32? = nil, completion: @escaping ((_ data: FeedResponseTopicView?, _ error: ErrorResponse?) -> Void)) {
+        topicsGetFeaturedTopicsWithRequestBuilder(authorization: authorization, cursor: cursor, limit: limit).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Get featured topics
-     - GET /v0.6/topics/featured
+     - GET /v0.7/topics/featured
+
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
     "app" : {
       "deepLink" : "aeiou",
       "name" : "aeiou",
-      "platformType" : "aeiou",
+      "platformType" : "Windows",
       "iconUrl" : "aeiou",
       "iconHandle" : "aeiou",
       "storeLink" : "aeiou"
     },
     "topicHandle" : "aeiou",
-    "publisherType" : "aeiou",
+    "publisherType" : "User",
     "pinned" : true,
     "blobUrl" : "aeiou",
     "language" : "aeiou",
     "title" : "aeiou",
     "blobHandle" : "aeiou",
     "liked" : true,
-    "contentStatus" : "aeiou",
-    "totalComments" : 123456789,
+    "contentStatus" : "Active",
+    "totalComments" : 6,
     "deepLink" : "aeiou",
     "createdTime" : "2000-01-23T04:56:07.000+00:00",
     "lastUpdatedTime" : "2000-01-23T04:56:07.000+00:00",
     "text" : "aeiou",
     "categories" : "aeiou",
-    "totalLikes" : 123456789,
-    "blobType" : "aeiou",
+    "totalLikes" : 0,
+    "blobType" : "Unknown",
     "user" : {
       "userHandle" : "aeiou",
       "firstName" : "aeiou",
       "lastName" : "aeiou",
       "photoUrl" : "aeiou",
-      "followerStatus" : "aeiou",
-      "visibility" : "aeiou",
+      "followerStatus" : "None",
+      "visibility" : "Public",
       "photoHandle" : "aeiou"
     },
     "friendlyName" : "aeiou",
     "group" : "aeiou"
   } ]
 }}, {contentType=application/xml, example=<null>
-  <cursor>string</cursor>
+  <cursor>aeiou</cursor>
 </null>}]
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
@@ -157,65 +163,66 @@ open class TopicsAPI: APIBase {
     "app" : {
       "deepLink" : "aeiou",
       "name" : "aeiou",
-      "platformType" : "aeiou",
+      "platformType" : "Windows",
       "iconUrl" : "aeiou",
       "iconHandle" : "aeiou",
       "storeLink" : "aeiou"
     },
     "topicHandle" : "aeiou",
-    "publisherType" : "aeiou",
+    "publisherType" : "User",
     "pinned" : true,
     "blobUrl" : "aeiou",
     "language" : "aeiou",
     "title" : "aeiou",
     "blobHandle" : "aeiou",
     "liked" : true,
-    "contentStatus" : "aeiou",
-    "totalComments" : 123456789,
+    "contentStatus" : "Active",
+    "totalComments" : 6,
     "deepLink" : "aeiou",
     "createdTime" : "2000-01-23T04:56:07.000+00:00",
     "lastUpdatedTime" : "2000-01-23T04:56:07.000+00:00",
     "text" : "aeiou",
     "categories" : "aeiou",
-    "totalLikes" : 123456789,
-    "blobType" : "aeiou",
+    "totalLikes" : 0,
+    "blobType" : "Unknown",
     "user" : {
       "userHandle" : "aeiou",
       "firstName" : "aeiou",
       "lastName" : "aeiou",
       "photoUrl" : "aeiou",
-      "followerStatus" : "aeiou",
-      "visibility" : "aeiou",
+      "followerStatus" : "None",
+      "visibility" : "Public",
       "photoHandle" : "aeiou"
     },
     "friendlyName" : "aeiou",
     "group" : "aeiou"
   } ]
 }}, {contentType=application/xml, example=<null>
-  <cursor>string</cursor>
+  <cursor>aeiou</cursor>
 </null>}]
-     
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter cursor: (query) Current read cursor (optional)
      - parameter limit: (query) Number of items to return (optional)
-
      - returns: RequestBuilder<FeedResponseTopicView> 
      */
-    open class func topicsGetFeaturedTopicsWithRequestBuilder(cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
-        let path = "/v0.6/topics/featured"
+    open class func topicsGetFeaturedTopicsWithRequestBuilder(authorization: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
+        let path = "/v0.7/topics/featured"
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [
-            "cursor": cursor,
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "cursor": cursor, 
             "limit": limit?.encodeToJSON()
+        ])
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
         ]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<FeedResponseTopicView>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
@@ -229,65 +236,66 @@ open class TopicsAPI: APIBase {
     }
 
     /**
-     Get popular topics today
-     
+     Get popular topics for a time range
      - parameter timeRange: (path) Time range 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter cursor: (query) Current read cursor (optional)
      - parameter limit: (query) Number of items to return (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicsGetPopularTopics(timeRange: TimeRange_topicsGetPopularTopics, cursor: Int32? = nil, limit: Int32? = nil, completion: @escaping ((_ data: FeedResponseTopicView?,_ error: Error?) -> Void)) {
-        topicsGetPopularTopicsWithRequestBuilder(timeRange: timeRange, cursor: cursor, limit: limit).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicsGetPopularTopics(timeRange: TimeRange_topicsGetPopularTopics, authorization: String, cursor: Int32? = nil, limit: Int32? = nil, completion: @escaping ((_ data: FeedResponseTopicView?, _ error: ErrorResponse?) -> Void)) {
+        topicsGetPopularTopicsWithRequestBuilder(timeRange: timeRange, authorization: authorization, cursor: cursor, limit: limit).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
-     Get popular topics today
-     - GET /v0.6/topics/popular/{timeRange}
+     Get popular topics for a time range
+     - GET /v0.7/topics/popular/{timeRange}
+
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
     "app" : {
       "deepLink" : "aeiou",
       "name" : "aeiou",
-      "platformType" : "aeiou",
+      "platformType" : "Windows",
       "iconUrl" : "aeiou",
       "iconHandle" : "aeiou",
       "storeLink" : "aeiou"
     },
     "topicHandle" : "aeiou",
-    "publisherType" : "aeiou",
+    "publisherType" : "User",
     "pinned" : true,
     "blobUrl" : "aeiou",
     "language" : "aeiou",
     "title" : "aeiou",
     "blobHandle" : "aeiou",
     "liked" : true,
-    "contentStatus" : "aeiou",
-    "totalComments" : 123456789,
+    "contentStatus" : "Active",
+    "totalComments" : 6,
     "deepLink" : "aeiou",
     "createdTime" : "2000-01-23T04:56:07.000+00:00",
     "lastUpdatedTime" : "2000-01-23T04:56:07.000+00:00",
     "text" : "aeiou",
     "categories" : "aeiou",
-    "totalLikes" : 123456789,
-    "blobType" : "aeiou",
+    "totalLikes" : 0,
+    "blobType" : "Unknown",
     "user" : {
       "userHandle" : "aeiou",
       "firstName" : "aeiou",
       "lastName" : "aeiou",
       "photoUrl" : "aeiou",
-      "followerStatus" : "aeiou",
-      "visibility" : "aeiou",
+      "followerStatus" : "None",
+      "visibility" : "Public",
       "photoHandle" : "aeiou"
     },
     "friendlyName" : "aeiou",
     "group" : "aeiou"
   } ]
 }}, {contentType=application/xml, example=<null>
-  <cursor>string</cursor>
+  <cursor>aeiou</cursor>
 </null>}]
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
@@ -295,340 +303,345 @@ open class TopicsAPI: APIBase {
     "app" : {
       "deepLink" : "aeiou",
       "name" : "aeiou",
-      "platformType" : "aeiou",
+      "platformType" : "Windows",
       "iconUrl" : "aeiou",
       "iconHandle" : "aeiou",
       "storeLink" : "aeiou"
     },
     "topicHandle" : "aeiou",
-    "publisherType" : "aeiou",
+    "publisherType" : "User",
     "pinned" : true,
     "blobUrl" : "aeiou",
     "language" : "aeiou",
     "title" : "aeiou",
     "blobHandle" : "aeiou",
     "liked" : true,
-    "contentStatus" : "aeiou",
-    "totalComments" : 123456789,
+    "contentStatus" : "Active",
+    "totalComments" : 6,
     "deepLink" : "aeiou",
     "createdTime" : "2000-01-23T04:56:07.000+00:00",
     "lastUpdatedTime" : "2000-01-23T04:56:07.000+00:00",
     "text" : "aeiou",
     "categories" : "aeiou",
-    "totalLikes" : 123456789,
-    "blobType" : "aeiou",
+    "totalLikes" : 0,
+    "blobType" : "Unknown",
     "user" : {
       "userHandle" : "aeiou",
       "firstName" : "aeiou",
       "lastName" : "aeiou",
       "photoUrl" : "aeiou",
-      "followerStatus" : "aeiou",
-      "visibility" : "aeiou",
+      "followerStatus" : "None",
+      "visibility" : "Public",
       "photoHandle" : "aeiou"
     },
     "friendlyName" : "aeiou",
     "group" : "aeiou"
   } ]
 }}, {contentType=application/xml, example=<null>
-  <cursor>string</cursor>
+  <cursor>aeiou</cursor>
 </null>}]
-     
      - parameter timeRange: (path) Time range 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter cursor: (query) Current read cursor (optional)
      - parameter limit: (query) Number of items to return (optional)
-
      - returns: RequestBuilder<FeedResponseTopicView> 
      */
-    open class func topicsGetPopularTopicsWithRequestBuilder(timeRange: TimeRange_topicsGetPopularTopics, cursor: Int32? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
-        var path = "/v0.6/topics/popular/{timeRange}"
+    open class func topicsGetPopularTopicsWithRequestBuilder(timeRange: TimeRange_topicsGetPopularTopics, authorization: String, cursor: Int32? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
+        var path = "/v0.7/topics/popular/{timeRange}"
         path = path.replacingOccurrences(of: "{timeRange}", with: "\(timeRange.rawValue)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [
-            "cursor": cursor?.encodeToJSON(),
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "cursor": cursor?.encodeToJSON(), 
             "limit": limit?.encodeToJSON()
+        ])
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
         ]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<FeedResponseTopicView>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
      Get topic
-     
      - parameter topicHandle: (path) Topic handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicsGetTopic(topicHandle: String, completion: @escaping ((_ data: TopicView?,_ error: Error?) -> Void)) {
-        topicsGetTopicWithRequestBuilder(topicHandle: topicHandle).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicsGetTopic(topicHandle: String, authorization: String, completion: @escaping ((_ data: TopicView?, _ error: ErrorResponse?) -> Void)) {
+        topicsGetTopicWithRequestBuilder(topicHandle: topicHandle, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Get topic
-     - GET /v0.6/topics/{topicHandle}
-     - examples: [{contentType=application/json, example={
-  "app" : {
-    "deepLink" : "aeiou",
-    "name" : "aeiou",
-    "platformType" : "aeiou",
-    "iconUrl" : "aeiou",
-    "iconHandle" : "aeiou",
-    "storeLink" : "aeiou"
-  },
-  "topicHandle" : "aeiou",
-  "publisherType" : "aeiou",
-  "pinned" : true,
-  "blobUrl" : "aeiou",
-  "language" : "aeiou",
-  "title" : "aeiou",
-  "blobHandle" : "aeiou",
-  "liked" : true,
-  "contentStatus" : "aeiou",
-  "totalComments" : 123456789,
-  "deepLink" : "aeiou",
-  "createdTime" : "2000-01-23T04:56:07.000+00:00",
-  "lastUpdatedTime" : "2000-01-23T04:56:07.000+00:00",
-  "text" : "aeiou",
-  "categories" : "aeiou",
-  "totalLikes" : 123456789,
-  "blobType" : "aeiou",
-  "user" : {
-    "userHandle" : "aeiou",
-    "firstName" : "aeiou",
-    "lastName" : "aeiou",
-    "photoUrl" : "aeiou",
-    "followerStatus" : "aeiou",
-    "visibility" : "aeiou",
-    "photoHandle" : "aeiou"
-  },
-  "friendlyName" : "aeiou",
-  "group" : "aeiou"
-}}, {contentType=application/xml, example=<null>
-  <topicHandle>string</topicHandle>
-  <createdTime>2000-01-23T04:56:07.000Z</createdTime>
-  <lastUpdatedTime>2000-01-23T04:56:07.000Z</lastUpdatedTime>
-  <publisherType>string</publisherType>
-  <title>string</title>
-  <text>string</text>
-  <blobType>string</blobType>
-  <blobHandle>string</blobHandle>
-  <blobUrl>string</blobUrl>
-  <categories>string</categories>
-  <language>string</language>
-  <group>string</group>
-  <deepLink>string</deepLink>
-  <friendlyName>string</friendlyName>
-  <totalLikes>123456</totalLikes>
-  <totalComments>123456</totalComments>
-  <liked>true</liked>
-  <pinned>true</pinned>
-  <contentStatus>string</contentStatus>
-</null>}]
-     - examples: [{contentType=application/json, example={
-  "app" : {
-    "deepLink" : "aeiou",
-    "name" : "aeiou",
-    "platformType" : "aeiou",
-    "iconUrl" : "aeiou",
-    "iconHandle" : "aeiou",
-    "storeLink" : "aeiou"
-  },
-  "topicHandle" : "aeiou",
-  "publisherType" : "aeiou",
-  "pinned" : true,
-  "blobUrl" : "aeiou",
-  "language" : "aeiou",
-  "title" : "aeiou",
-  "blobHandle" : "aeiou",
-  "liked" : true,
-  "contentStatus" : "aeiou",
-  "totalComments" : 123456789,
-  "deepLink" : "aeiou",
-  "createdTime" : "2000-01-23T04:56:07.000+00:00",
-  "lastUpdatedTime" : "2000-01-23T04:56:07.000+00:00",
-  "text" : "aeiou",
-  "categories" : "aeiou",
-  "totalLikes" : 123456789,
-  "blobType" : "aeiou",
-  "user" : {
-    "userHandle" : "aeiou",
-    "firstName" : "aeiou",
-    "lastName" : "aeiou",
-    "photoUrl" : "aeiou",
-    "followerStatus" : "aeiou",
-    "visibility" : "aeiou",
-    "photoHandle" : "aeiou"
-  },
-  "friendlyName" : "aeiou",
-  "group" : "aeiou"
-}}, {contentType=application/xml, example=<null>
-  <topicHandle>string</topicHandle>
-  <createdTime>2000-01-23T04:56:07.000Z</createdTime>
-  <lastUpdatedTime>2000-01-23T04:56:07.000Z</lastUpdatedTime>
-  <publisherType>string</publisherType>
-  <title>string</title>
-  <text>string</text>
-  <blobType>string</blobType>
-  <blobHandle>string</blobHandle>
-  <blobUrl>string</blobUrl>
-  <categories>string</categories>
-  <language>string</language>
-  <group>string</group>
-  <deepLink>string</deepLink>
-  <friendlyName>string</friendlyName>
-  <totalLikes>123456</totalLikes>
-  <totalComments>123456</totalComments>
-  <liked>true</liked>
-  <pinned>true</pinned>
-  <contentStatus>string</contentStatus>
-</null>}]
-     
-     - parameter topicHandle: (path) Topic handle 
+     - GET /v0.7/topics/{topicHandle}
 
+     - examples: [{contentType=application/json, example={
+  "app" : {
+    "deepLink" : "aeiou",
+    "name" : "aeiou",
+    "platformType" : "Windows",
+    "iconUrl" : "aeiou",
+    "iconHandle" : "aeiou",
+    "storeLink" : "aeiou"
+  },
+  "topicHandle" : "aeiou",
+  "publisherType" : "User",
+  "pinned" : true,
+  "blobUrl" : "aeiou",
+  "language" : "aeiou",
+  "title" : "aeiou",
+  "blobHandle" : "aeiou",
+  "liked" : true,
+  "contentStatus" : "Active",
+  "totalComments" : 6,
+  "deepLink" : "aeiou",
+  "createdTime" : "2000-01-23T04:56:07.000+00:00",
+  "lastUpdatedTime" : "2000-01-23T04:56:07.000+00:00",
+  "text" : "aeiou",
+  "categories" : "aeiou",
+  "totalLikes" : 0,
+  "blobType" : "Unknown",
+  "user" : {
+    "userHandle" : "aeiou",
+    "firstName" : "aeiou",
+    "lastName" : "aeiou",
+    "photoUrl" : "aeiou",
+    "followerStatus" : "None",
+    "visibility" : "Public",
+    "photoHandle" : "aeiou"
+  },
+  "friendlyName" : "aeiou",
+  "group" : "aeiou"
+}}, {contentType=application/xml, example=<null>
+  <topicHandle>aeiou</topicHandle>
+  <createdTime>2000-01-23T04:56:07.000Z</createdTime>
+  <lastUpdatedTime>2000-01-23T04:56:07.000Z</lastUpdatedTime>
+  <publisherType>aeiou</publisherType>
+  <title>aeiou</title>
+  <text>aeiou</text>
+  <blobType>aeiou</blobType>
+  <blobHandle>aeiou</blobHandle>
+  <blobUrl>aeiou</blobUrl>
+  <categories>aeiou</categories>
+  <language>aeiou</language>
+  <group>aeiou</group>
+  <deepLink>aeiou</deepLink>
+  <friendlyName>aeiou</friendlyName>
+  <totalLikes>123456789</totalLikes>
+  <totalComments>123456789</totalComments>
+  <liked>true</liked>
+  <pinned>true</pinned>
+  <contentStatus>aeiou</contentStatus>
+</null>}]
+     - examples: [{contentType=application/json, example={
+  "app" : {
+    "deepLink" : "aeiou",
+    "name" : "aeiou",
+    "platformType" : "Windows",
+    "iconUrl" : "aeiou",
+    "iconHandle" : "aeiou",
+    "storeLink" : "aeiou"
+  },
+  "topicHandle" : "aeiou",
+  "publisherType" : "User",
+  "pinned" : true,
+  "blobUrl" : "aeiou",
+  "language" : "aeiou",
+  "title" : "aeiou",
+  "blobHandle" : "aeiou",
+  "liked" : true,
+  "contentStatus" : "Active",
+  "totalComments" : 6,
+  "deepLink" : "aeiou",
+  "createdTime" : "2000-01-23T04:56:07.000+00:00",
+  "lastUpdatedTime" : "2000-01-23T04:56:07.000+00:00",
+  "text" : "aeiou",
+  "categories" : "aeiou",
+  "totalLikes" : 0,
+  "blobType" : "Unknown",
+  "user" : {
+    "userHandle" : "aeiou",
+    "firstName" : "aeiou",
+    "lastName" : "aeiou",
+    "photoUrl" : "aeiou",
+    "followerStatus" : "None",
+    "visibility" : "Public",
+    "photoHandle" : "aeiou"
+  },
+  "friendlyName" : "aeiou",
+  "group" : "aeiou"
+}}, {contentType=application/xml, example=<null>
+  <topicHandle>aeiou</topicHandle>
+  <createdTime>2000-01-23T04:56:07.000Z</createdTime>
+  <lastUpdatedTime>2000-01-23T04:56:07.000Z</lastUpdatedTime>
+  <publisherType>aeiou</publisherType>
+  <title>aeiou</title>
+  <text>aeiou</text>
+  <blobType>aeiou</blobType>
+  <blobHandle>aeiou</blobHandle>
+  <blobUrl>aeiou</blobUrl>
+  <categories>aeiou</categories>
+  <language>aeiou</language>
+  <group>aeiou</group>
+  <deepLink>aeiou</deepLink>
+  <friendlyName>aeiou</friendlyName>
+  <totalLikes>123456789</totalLikes>
+  <totalComments>123456789</totalComments>
+  <liked>true</liked>
+  <pinned>true</pinned>
+  <contentStatus>aeiou</contentStatus>
+</null>}]
+     - parameter topicHandle: (path) Topic handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<TopicView> 
      */
-    open class func topicsGetTopicWithRequestBuilder(topicHandle: String) -> RequestBuilder<TopicView> {
-        var path = "/v0.6/topics/{topicHandle}"
+    open class func topicsGetTopicWithRequestBuilder(topicHandle: String, authorization: String) -> RequestBuilder<TopicView> {
+        var path = "/v0.7/topics/{topicHandle}"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [:]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<TopicView>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
      * enum for parameter publisherType
      */
-    public enum PublisherType_topicsGetTopicName: String { 
+    public enum PublisherType_topicsGetTopicByName: String { 
         case user = "User"
         case app = "App"
     }
 
     /**
-     Get a topic name
-     
+     Get a topic by topic name
      - parameter topicName: (path) Topic name 
      - parameter publisherType: (query) Publisher type 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicsGetTopicName(topicName: String, publisherType: PublisherType_topicsGetTopicName, completion: @escaping ((_ data: GetTopicNameResponse?,_ error: Error?) -> Void)) {
-        topicsGetTopicNameWithRequestBuilder(topicName: topicName, publisherType: publisherType).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicsGetTopicByName(topicName: String, publisherType: PublisherType_topicsGetTopicByName, authorization: String, completion: @escaping ((_ data: GetTopicByNameResponse?, _ error: ErrorResponse?) -> Void)) {
+        topicsGetTopicByNameWithRequestBuilder(topicName: topicName, publisherType: publisherType, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
-     Get a topic name
-     - GET /v0.6/topics/names/{topicName}
+     Get a topic by topic name
+     - GET /v0.7/topics/names/{topicName}
+
      - examples: [{contentType=application/json, example={
   "topicHandle" : "aeiou"
 }}, {contentType=application/xml, example=<null>
-  <topicHandle>string</topicHandle>
+  <topicHandle>aeiou</topicHandle>
 </null>}]
      - examples: [{contentType=application/json, example={
   "topicHandle" : "aeiou"
 }}, {contentType=application/xml, example=<null>
-  <topicHandle>string</topicHandle>
+  <topicHandle>aeiou</topicHandle>
 </null>}]
-     
      - parameter topicName: (path) Topic name 
      - parameter publisherType: (query) Publisher type 
-
-     - returns: RequestBuilder<GetTopicNameResponse> 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
+     - returns: RequestBuilder<GetTopicByNameResponse> 
      */
-    open class func topicsGetTopicNameWithRequestBuilder(topicName: String, publisherType: PublisherType_topicsGetTopicName) -> RequestBuilder<GetTopicNameResponse> {
-        var path = "/v0.6/topics/names/{topicName}"
+    open class func topicsGetTopicByNameWithRequestBuilder(topicName: String, publisherType: PublisherType_topicsGetTopicByName, authorization: String) -> RequestBuilder<GetTopicByNameResponse> {
+        var path = "/v0.7/topics/names/{topicName}"
         path = path.replacingOccurrences(of: "{topicName}", with: "\(topicName)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
             "publisherType": publisherType.rawValue
+        ])
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
         ]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
-        let requestBuilder: RequestBuilder<GetTopicNameResponse>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
 
-        return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
+        let requestBuilder: RequestBuilder<GetTopicByNameResponse>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
+
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
      Get recent topics
-     
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter cursor: (query) Current read cursor (optional)
      - parameter limit: (query) Number of items to return (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicsGetTopics(cursor: String? = nil, limit: Int32? = nil, completion: @escaping ((_ data: FeedResponseTopicView?,_ error: Error?) -> Void)) {
-        topicsGetTopicsWithRequestBuilder(cursor: cursor, limit: limit).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicsGetTopics(authorization: String, cursor: String? = nil, limit: Int32? = nil, completion: @escaping ((_ data: FeedResponseTopicView?, _ error: ErrorResponse?) -> Void)) {
+        topicsGetTopicsWithRequestBuilder(authorization: authorization, cursor: cursor, limit: limit).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Get recent topics
-     - GET /v0.6/topics
+     - GET /v0.7/topics
+
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
     "app" : {
       "deepLink" : "aeiou",
       "name" : "aeiou",
-      "platformType" : "aeiou",
+      "platformType" : "Windows",
       "iconUrl" : "aeiou",
       "iconHandle" : "aeiou",
       "storeLink" : "aeiou"
     },
     "topicHandle" : "aeiou",
-    "publisherType" : "aeiou",
+    "publisherType" : "User",
     "pinned" : true,
     "blobUrl" : "aeiou",
     "language" : "aeiou",
     "title" : "aeiou",
     "blobHandle" : "aeiou",
     "liked" : true,
-    "contentStatus" : "aeiou",
-    "totalComments" : 123456789,
+    "contentStatus" : "Active",
+    "totalComments" : 6,
     "deepLink" : "aeiou",
     "createdTime" : "2000-01-23T04:56:07.000+00:00",
     "lastUpdatedTime" : "2000-01-23T04:56:07.000+00:00",
     "text" : "aeiou",
     "categories" : "aeiou",
-    "totalLikes" : 123456789,
-    "blobType" : "aeiou",
+    "totalLikes" : 0,
+    "blobType" : "Unknown",
     "user" : {
       "userHandle" : "aeiou",
       "firstName" : "aeiou",
       "lastName" : "aeiou",
       "photoUrl" : "aeiou",
-      "followerStatus" : "aeiou",
-      "visibility" : "aeiou",
+      "followerStatus" : "None",
+      "visibility" : "Public",
       "photoHandle" : "aeiou"
     },
     "friendlyName" : "aeiou",
     "group" : "aeiou"
   } ]
 }}, {contentType=application/xml, example=<null>
-  <cursor>string</cursor>
+  <cursor>aeiou</cursor>
 </null>}]
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
@@ -636,225 +649,242 @@ open class TopicsAPI: APIBase {
     "app" : {
       "deepLink" : "aeiou",
       "name" : "aeiou",
-      "platformType" : "aeiou",
+      "platformType" : "Windows",
       "iconUrl" : "aeiou",
       "iconHandle" : "aeiou",
       "storeLink" : "aeiou"
     },
     "topicHandle" : "aeiou",
-    "publisherType" : "aeiou",
+    "publisherType" : "User",
     "pinned" : true,
     "blobUrl" : "aeiou",
     "language" : "aeiou",
     "title" : "aeiou",
     "blobHandle" : "aeiou",
     "liked" : true,
-    "contentStatus" : "aeiou",
-    "totalComments" : 123456789,
+    "contentStatus" : "Active",
+    "totalComments" : 6,
     "deepLink" : "aeiou",
     "createdTime" : "2000-01-23T04:56:07.000+00:00",
     "lastUpdatedTime" : "2000-01-23T04:56:07.000+00:00",
     "text" : "aeiou",
     "categories" : "aeiou",
-    "totalLikes" : 123456789,
-    "blobType" : "aeiou",
+    "totalLikes" : 0,
+    "blobType" : "Unknown",
     "user" : {
       "userHandle" : "aeiou",
       "firstName" : "aeiou",
       "lastName" : "aeiou",
       "photoUrl" : "aeiou",
-      "followerStatus" : "aeiou",
-      "visibility" : "aeiou",
+      "followerStatus" : "None",
+      "visibility" : "Public",
       "photoHandle" : "aeiou"
     },
     "friendlyName" : "aeiou",
     "group" : "aeiou"
   } ]
 }}, {contentType=application/xml, example=<null>
-  <cursor>string</cursor>
+  <cursor>aeiou</cursor>
 </null>}]
-     
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter cursor: (query) Current read cursor (optional)
      - parameter limit: (query) Number of items to return (optional)
-
      - returns: RequestBuilder<FeedResponseTopicView> 
      */
-    open class func topicsGetTopicsWithRequestBuilder(cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
-        let path = "/v0.6/topics"
+    open class func topicsGetTopicsWithRequestBuilder(authorization: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseTopicView> {
+        let path = "/v0.7/topics"
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [
-            "cursor": cursor,
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "cursor": cursor, 
             "limit": limit?.encodeToJSON()
+        ])
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
         ]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<FeedResponseTopicView>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
      Create a new topic
-     
      - parameter request: (body) Post topic request 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicsPostTopic(request: PostTopicRequest, completion: @escaping ((_ data: PostTopicResponse?,_ error: Error?) -> Void)) {
-        topicsPostTopicWithRequestBuilder(request: request).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicsPostTopic(request: PostTopicRequest, authorization: String, completion: @escaping ((_ data: PostTopicResponse?, _ error: ErrorResponse?) -> Void)) {
+        topicsPostTopicWithRequestBuilder(request: request, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Create a new topic
-     - POST /v0.6/topics
-     - examples: [{contentType=application/json, example={
-  "topicHandle" : "aeiou"
-}}, {contentType=application/xml, example=<null>
-  <topicHandle>string</topicHandle>
-</null>}]
-     - examples: [{contentType=application/json, example={
-  "topicHandle" : "aeiou"
-}}, {contentType=application/xml, example=<null>
-  <topicHandle>string</topicHandle>
-</null>}]
-     
-     - parameter request: (body) Post topic request 
+     - POST /v0.7/topics
 
+     - examples: [{contentType=application/json, example={
+  "topicHandle" : "aeiou"
+}}, {contentType=application/xml, example=<null>
+  <topicHandle>aeiou</topicHandle>
+</null>}]
+     - examples: [{contentType=application/json, example={
+  "topicHandle" : "aeiou"
+}}, {contentType=application/xml, example=<null>
+  <topicHandle>aeiou</topicHandle>
+</null>}]
+     - parameter request: (body) Post topic request 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<PostTopicResponse> 
      */
-    open class func topicsPostTopicWithRequestBuilder(request: PostTopicRequest) -> RequestBuilder<PostTopicResponse> {
-        let path = "/v0.6/topics"
+    open class func topicsPostTopicWithRequestBuilder(request: PostTopicRequest, authorization: String) -> RequestBuilder<PostTopicResponse> {
+        let path = "/v0.7/topics"
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<PostTopicResponse>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**
      Create a topic name
-     
      - parameter request: (body) Post topic name request 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicsPostTopicName(request: PostTopicNameRequest, completion: @escaping ((_ data: Object?,_ error: Error?) -> Void)) {
-        topicsPostTopicNameWithRequestBuilder(request: request).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicsPostTopicName(request: PostTopicNameRequest, authorization: String, completion: @escaping ((_ data: Object?, _ error: ErrorResponse?) -> Void)) {
+        topicsPostTopicNameWithRequestBuilder(request: request, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Create a topic name
-     - POST /v0.6/topics/names
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     
-     - parameter request: (body) Post topic name request 
+     - POST /v0.7/topics/names
 
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - parameter request: (body) Post topic name request 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<Object> 
      */
-    open class func topicsPostTopicNameWithRequestBuilder(request: PostTopicNameRequest) -> RequestBuilder<Object> {
-        let path = "/v0.6/topics/names"
+    open class func topicsPostTopicNameWithRequestBuilder(request: PostTopicNameRequest, authorization: String) -> RequestBuilder<Object> {
+        let path = "/v0.7/topics/names"
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<Object>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**
      Update topic
-     
      - parameter topicHandle: (path) Topic handle 
      - parameter request: (body) Put topic request 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicsPutTopic(topicHandle: String, request: PutTopicRequest, completion: @escaping ((_ data: Object?,_ error: Error?) -> Void)) {
-        topicsPutTopicWithRequestBuilder(topicHandle: topicHandle, request: request).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicsPutTopic(topicHandle: String, request: PutTopicRequest, authorization: String, completion: @escaping ((_ data: Object?, _ error: ErrorResponse?) -> Void)) {
+        topicsPutTopicWithRequestBuilder(topicHandle: topicHandle, request: request, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Update topic
-     - PUT /v0.6/topics/{topicHandle}
+     - PUT /v0.7/topics/{topicHandle}
+
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
-     
      - parameter topicHandle: (path) Topic handle 
      - parameter request: (body) Put topic request 
-
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<Object> 
      */
-    open class func topicsPutTopicWithRequestBuilder(topicHandle: String, request: PutTopicRequest) -> RequestBuilder<Object> {
-        var path = "/v0.6/topics/{topicHandle}"
+    open class func topicsPutTopicWithRequestBuilder(topicHandle: String, request: PutTopicRequest, authorization: String) -> RequestBuilder<Object> {
+        var path = "/v0.7/topics/{topicHandle}"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<Object>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "PUT", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
     /**
      Update a topic name
-     
      - parameter topicName: (path) Topic name 
      - parameter request: (body) Update topic name request 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicsPutTopicName(topicName: String, request: PutTopicNameRequest, completion: @escaping ((_ data: Object?,_ error: Error?) -> Void)) {
-        topicsPutTopicNameWithRequestBuilder(topicName: topicName, request: request).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicsPutTopicName(topicName: String, request: PutTopicNameRequest, authorization: String, completion: @escaping ((_ data: Object?, _ error: ErrorResponse?) -> Void)) {
+        topicsPutTopicNameWithRequestBuilder(topicName: topicName, request: request, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Update a topic name
-     - PUT /v0.6/topics/names/{topicName}
+     - PUT /v0.7/topics/names/{topicName}
+
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
      - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
 </null>}]
-     
      - parameter topicName: (path) Topic name 
      - parameter request: (body) Update topic name request 
-
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<Object> 
      */
-    open class func topicsPutTopicNameWithRequestBuilder(topicName: String, request: PutTopicNameRequest) -> RequestBuilder<Object> {
-        var path = "/v0.6/topics/names/{topicName}"
+    open class func topicsPutTopicNameWithRequestBuilder(topicName: String, request: PutTopicNameRequest, authorization: String) -> RequestBuilder<Object> {
+        var path = "/v0.7/topics/names/{topicName}"
         path = path.replacingOccurrences(of: "{topicName}", with: "\(topicName)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = request.encodeToJSON() as? [String:AnyObject]
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<Object>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "PUT", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "PUT", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
 }

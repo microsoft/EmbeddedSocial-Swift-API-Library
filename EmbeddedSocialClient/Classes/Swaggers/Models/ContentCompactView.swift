@@ -10,6 +10,7 @@ import Foundation
 
 /** Content compact view */
 open class ContentCompactView: JSONEncodable {
+
     public enum ContentType: String { 
         case unknown = "Unknown"
         case topic = "Topic"
@@ -52,6 +53,7 @@ open class ContentCompactView: JSONEncodable {
         nillableDictionary["blobType"] = self.blobType?.rawValue
         nillableDictionary["blobHandle"] = self.blobHandle
         nillableDictionary["blobUrl"] = self.blobUrl
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

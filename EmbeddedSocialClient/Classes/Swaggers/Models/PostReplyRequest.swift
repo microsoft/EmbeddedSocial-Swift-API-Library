@@ -10,6 +10,7 @@ import Foundation
 
 /** Request to post (create) reply */
 open class PostReplyRequest: JSONEncodable {
+
     /** Gets or sets reply text */
     public var text: String?
     /** Gets or sets reply language */
@@ -22,6 +23,7 @@ open class PostReplyRequest: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["text"] = self.text
         nillableDictionary["language"] = self.language
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

@@ -10,6 +10,7 @@ import Foundation
 
 /** User profile view */
 open class UserProfileView: JSONEncodable {
+
     public enum Visibility: String { 
         case _public = "Public"
         case _private = "Private"
@@ -77,6 +78,7 @@ open class UserProfileView: JSONEncodable {
         nillableDictionary["followerStatus"] = self.followerStatus?.rawValue
         nillableDictionary["followingStatus"] = self.followingStatus?.rawValue
         nillableDictionary["profileStatus"] = self.profileStatus?.rawValue
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

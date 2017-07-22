@@ -10,6 +10,7 @@ import Foundation
 
 /** Request to post (create) comment */
 open class PostCommentRequest: JSONEncodable {
+
     public enum BlobType: String { 
         case unknown = "Unknown"
         case image = "Image"
@@ -34,6 +35,7 @@ open class PostCommentRequest: JSONEncodable {
         nillableDictionary["blobType"] = self.blobType?.rawValue
         nillableDictionary["blobHandle"] = self.blobHandle
         nillableDictionary["language"] = self.language
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

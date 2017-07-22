@@ -10,6 +10,7 @@ import Foundation
 
 /** Request to post (create) user */
 open class PostUserRequest: JSONEncodable {
+
     /** Gets or sets instance id -- Unique installation id of the app */
     public var instanceId: String?
     /** Gets or sets first name of the user */
@@ -31,6 +32,7 @@ open class PostUserRequest: JSONEncodable {
         nillableDictionary["lastName"] = self.lastName
         nillableDictionary["bio"] = self.bio
         nillableDictionary["photoHandle"] = self.photoHandle
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

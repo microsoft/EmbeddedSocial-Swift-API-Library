@@ -10,6 +10,7 @@ import Foundation
 
 /** Request to put (update) topic */
 open class PutTopicRequest: JSONEncodable {
+
     /** Gets or sets topic title */
     public var title: String?
     /** Gets or sets topic text */
@@ -25,6 +26,7 @@ open class PutTopicRequest: JSONEncodable {
         nillableDictionary["title"] = self.title
         nillableDictionary["text"] = self.text
         nillableDictionary["categories"] = self.categories
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

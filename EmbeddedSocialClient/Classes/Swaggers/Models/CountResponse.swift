@@ -10,6 +10,7 @@ import Foundation
 
 /** Count response */
 open class CountResponse: JSONEncodable {
+
     /** Gets or sets count */
     public var count: Int64?
 
@@ -19,6 +20,7 @@ open class CountResponse: JSONEncodable {
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["count"] = self.count?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

@@ -10,6 +10,7 @@ import Foundation
 
 /** Topic view */
 open class TopicView: JSONEncodable {
+
     public enum PublisherType: String { 
         case user = "User"
         case app = "App"
@@ -95,6 +96,7 @@ open class TopicView: JSONEncodable {
         nillableDictionary["pinned"] = self.pinned
         nillableDictionary["contentStatus"] = self.contentStatus?.rawValue
         nillableDictionary["app"] = self.app?.encodeToJSON()
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

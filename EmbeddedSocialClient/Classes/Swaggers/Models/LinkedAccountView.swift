@@ -10,6 +10,7 @@ import Foundation
 
 /** Linked account view */
 open class LinkedAccountView: JSONEncodable {
+
     public enum IdentityProvider: String { 
         case facebook = "Facebook"
         case microsoft = "Microsoft"
@@ -30,6 +31,7 @@ open class LinkedAccountView: JSONEncodable {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["identityProvider"] = self.identityProvider?.rawValue
         nillableDictionary["accountId"] = self.accountId
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }
