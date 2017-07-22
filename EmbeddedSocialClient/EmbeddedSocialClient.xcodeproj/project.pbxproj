@@ -79,6 +79,7 @@
 		6FC0668A1F2151C5003746BB /* UserCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066451F2151C4003746BB /* UserCompactView.swift */; };
 		6FC0668B1F2151C5003746BB /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066461F2151C4003746BB /* UserProfileView.swift */; };
 		6FC0668C1F2151C5003746BB /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066471F2151C4003746BB /* Models.swift */; };
+		6FED03B41F22C81D00850DCA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FED03B31F22C81D00850DCA /* Media.xcassets */; };
 		74495052979D15DC796A25BD /* Pods_EmbeddedSocialClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C569334B6D7EFFD8CE780404 /* Pods_EmbeddedSocialClient.framework */; };
 /* End PBXBuildFile section */
 
@@ -169,6 +170,7 @@
 		6FC066451F2151C4003746BB /* UserCompactView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCompactView.swift; sourceTree = "<group>"; };
 		6FC066461F2151C4003746BB /* UserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		6FC066471F2151C4003746BB /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		6FED03B31F22C81D00850DCA /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		759F48EE3269A3D8C0344D63 /* Pods_EmbeddedSocialClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmbeddedSocialClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		778EFBA489D0AA3A50F921E2 /* Pods-EmbeddedSocialClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EmbeddedSocialClient.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-EmbeddedSocialClient/Pods-EmbeddedSocialClient.debug.xcconfig"; sourceTree = "<group>"; };
 		C569334B6D7EFFD8CE780404 /* Pods_EmbeddedSocialClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EmbeddedSocialClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,6 +243,7 @@
 			children = (
 				6F5B444C1F21511200FE6092 /* EmbeddedSocialClientTests.swift */,
 				6F5B444E1F21511200FE6092 /* Info.plist */,
+				6FED03B31F22C81D00850DCA /* Media.xcassets */,
 			);
 			path = EmbeddedSocialClientTests;
 			sourceTree = "<group>";
@@ -460,6 +463,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FED03B41F22C81D00850DCA /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

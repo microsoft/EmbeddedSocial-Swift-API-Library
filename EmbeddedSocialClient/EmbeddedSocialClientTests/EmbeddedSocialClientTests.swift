@@ -14,6 +14,12 @@ class EmbeddedSocialClientTests: XCTestCase {
     // how long to wait for async API calls to finish before giving up
     let testTimeout = 10.0
     
+    // which server to talk to
+    let serverURL = "https://dev-sharad.embeddedsocial.microsoft.com"
+    
+    // which authorization to use for API calls that require authentication
+    let authorization = "XXXXXXX"
+    
     // Put setup code here. This method is called before the invocation of each test method in the class.
     override func setUp() {
         super.setUp()
@@ -29,7 +35,7 @@ class EmbeddedSocialClientTests: XCTestCase {
         let expectation = self.expectation(description: "testGetBuildsCurrent")
         
         // setup the client interface
-        EmbeddedSocialClientAPI.basePath = "https://ppe.embeddedsocial.microsoft.com"
+        EmbeddedSocialClientAPI.basePath = serverURL
 
         // issue the call
         BuildsAPI.buildsGetBuildsCurrent { (buildsCurrentResponse: BuildsCurrentResponse?, error: Error?) in
@@ -61,10 +67,8 @@ class EmbeddedSocialClientTests: XCTestCase {
         let expectation = self.expectation(description: "testPostTopic")
         
         // setup the client interface
-        let appKey = "XX"
-        let token = "XX"
-        EmbeddedSocialClientAPI.basePath = "https://ppe.embeddedsocial.microsoft.com"
-        EmbeddedSocialClientAPI.customHeaders = ["Authorization":"Google AK=\(appKey)|TK=\(token)"]
+        EmbeddedSocialClientAPI.basePath = serverURL
+        EmbeddedSocialClientAPI.customHeaders = ["Authorization": authorization]
         
         // create a topic request
         let postTopicRequest = PostTopicRequest()
@@ -103,19 +107,15 @@ class EmbeddedSocialClientTests: XCTestCase {
         let expectation = self.expectation(description: "testPostImage")
         
         // setup the client interface
-        let appKey = "XX"
-        let token = "XX"
-        EmbeddedSocialClientAPI.basePath = "https://ppe.embeddedsocial.microsoft.com"
-        EmbeddedSocialClientAPI.customHeaders = ["Authorization":"Google AK=\(appKey)|TK=\(token)"]
+        EmbeddedSocialClientAPI.basePath = serverURL
+        EmbeddedSocialClientAPI.customHeaders = ["Authorization": authorization]
         
         // load an image into memory
-        guard let imageData = UIImagePNGRepresentation(UIImage(named: "image_2000")!) else {
-            XCTFail("not able to load image")
-            return
-        }
+        let myimage = #imageLiteral(resourceName: "sharad.jpg")
+        let imageData = UIImageJPEGRepresentation(myimage, 1.0) // as NSData?
         
         // issue the API call
-        ImagesAPI.imagesPostImage(imageType: ImagesAPI.ImageType_imagesPostImage.contentBlob, image: imageData) { (postImageResponse: PostImageResponse?, error: Error?) in
+        ImagesAPI.imagesPostImage(imageType: ImagesAPI.ImageType_imagesPostImage.contentBlob, image: imageData!) { (postImageResponse: PostImageResponse?, error: Error?) in
             if let error = error {
                 XCTFail("error posting new image : \(error.localizedDescription)")
                 return
@@ -132,7 +132,7 @@ class EmbeddedSocialClientTests: XCTestCase {
             expectation.fulfill()
         }
         
-        self.waitForExpectations(timeout: testTimeout) { error in
+        self.waitForExpectations(timeout: self.testTimeout) { error in
             if let error = error {
                 XCTFail("waitForExpectations errored: \(error)")
             }
