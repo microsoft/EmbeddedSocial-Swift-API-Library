@@ -55,7 +55,7 @@ open class BlobsAPI: APIBase {
      - parameter blob: (body) MIME encoded contents of the blob 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func blobsPostBlob(authorization: String, blob: URL, completion: @escaping ((_ data: PostBlobResponse?, _ error: ErrorResponse?) -> Void)) {
+    open class func blobsPostBlob(authorization: String, blob: Data, completion: @escaping ((_ data: PostBlobResponse?, _ error: ErrorResponse?) -> Void)) {
         blobsPostBlobWithRequestBuilder(authorization: authorization, blob: blob).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -81,7 +81,7 @@ open class BlobsAPI: APIBase {
      - parameter blob: (body) MIME encoded contents of the blob 
      - returns: RequestBuilder<PostBlobResponse> 
      */
-    open class func blobsPostBlobWithRequestBuilder(authorization: String, blob: URL) -> RequestBuilder<PostBlobResponse> {
+    open class func blobsPostBlobWithRequestBuilder(authorization: String, blob: Data) -> RequestBuilder<PostBlobResponse> {
         let path = "/v0.7/blobs"
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = blob.encodeToJSON() as? [String:AnyObject]

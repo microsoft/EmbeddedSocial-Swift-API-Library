@@ -11,6 +11,8 @@
 		6F3370E71F22DDBF00795CE1 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FED03B31F22C81D00850DCA /* Media.xcassets */; };
 		6F5B44481F21511200FE6092 /* EmbeddedSocialClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F5B443E1F21511200FE6092 /* EmbeddedSocialClient.framework */; };
 		6F5B444D1F21511200FE6092 /* EmbeddedSocialClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5B444C1F21511200FE6092 /* EmbeddedSocialClientTests.swift */; };
+		6FB3094D1F23F8BA000E8C6D /* GetTopicByNameResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3094C1F23F8BA000E8C6D /* GetTopicByNameResponse.swift */; };
+		6FB3094F1F23F8E1000E8C6D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3094E1F23F8E1000E8C6D /* Configuration.swift */; };
 		6FC066481F2151C4003746BB /* AlamofireImplementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066011F2151C4003746BB /* AlamofireImplementations.swift */; };
 		6FC066491F2151C4003746BB /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066021F2151C4003746BB /* APIHelper.swift */; };
 		6FC0664A1F2151C5003746BB /* BlobsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066041F2151C4003746BB /* BlobsAPI.swift */; };
@@ -45,7 +47,6 @@
 		6FC066671F2151C5003746BB /* FeedResponseUserCompactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066221F2151C4003746BB /* FeedResponseUserCompactView.swift */; };
 		6FC066681F2151C5003746BB /* FeedResponseUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066231F2151C4003746BB /* FeedResponseUserProfileView.swift */; };
 		6FC066691F2151C5003746BB /* GetRequestTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066241F2151C4003746BB /* GetRequestTokenResponse.swift */; };
-		6FC0666A1F2151C5003746BB /* GetTopicNameResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066251F2151C4003746BB /* GetTopicNameResponse.swift */; };
 		6FC0666B1F2151C5003746BB /* LinkedAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066261F2151C4003746BB /* LinkedAccountView.swift */; };
 		6FC0666C1F2151C5003746BB /* Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066271F2151C4003746BB /* Object.swift */; };
 		6FC0666D1F2151C5003746BB /* PostBlobResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC066281F2151C4003746BB /* PostBlobResponse.swift */; };
@@ -101,6 +102,8 @@
 		6F5B44471F21511200FE6092 /* EmbeddedSocialClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmbeddedSocialClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F5B444C1F21511200FE6092 /* EmbeddedSocialClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedSocialClientTests.swift; sourceTree = "<group>"; };
 		6F5B444E1F21511200FE6092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6FB3094C1F23F8BA000E8C6D /* GetTopicByNameResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTopicByNameResponse.swift; sourceTree = "<group>"; };
+		6FB3094E1F23F8E1000E8C6D /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		6FC066011F2151C4003746BB /* AlamofireImplementations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireImplementations.swift; sourceTree = "<group>"; };
 		6FC066021F2151C4003746BB /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		6FC066041F2151C4003746BB /* BlobsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlobsAPI.swift; sourceTree = "<group>"; };
@@ -135,7 +138,6 @@
 		6FC066221F2151C4003746BB /* FeedResponseUserCompactView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedResponseUserCompactView.swift; sourceTree = "<group>"; };
 		6FC066231F2151C4003746BB /* FeedResponseUserProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedResponseUserProfileView.swift; sourceTree = "<group>"; };
 		6FC066241F2151C4003746BB /* GetRequestTokenResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetRequestTokenResponse.swift; sourceTree = "<group>"; };
-		6FC066251F2151C4003746BB /* GetTopicNameResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTopicNameResponse.swift; sourceTree = "<group>"; };
 		6FC066261F2151C4003746BB /* LinkedAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedAccountView.swift; sourceTree = "<group>"; };
 		6FC066271F2151C4003746BB /* Object.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Object.swift; sourceTree = "<group>"; };
 		6FC066281F2151C4003746BB /* PostBlobResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostBlobResponse.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 		6FC066001F2151C4003746BB /* Swaggers */ = {
 			isa = PBXGroup;
 			children = (
+				6FB3094E1F23F8E1000E8C6D /* Configuration.swift */,
 				6FC066011F2151C4003746BB /* AlamofireImplementations.swift */,
 				6FC066021F2151C4003746BB /* APIHelper.swift */,
 				6FC066031F2151C4003746BB /* APIs */,
@@ -310,7 +313,7 @@
 				6FC066221F2151C4003746BB /* FeedResponseUserCompactView.swift */,
 				6FC066231F2151C4003746BB /* FeedResponseUserProfileView.swift */,
 				6FC066241F2151C4003746BB /* GetRequestTokenResponse.swift */,
-				6FC066251F2151C4003746BB /* GetTopicNameResponse.swift */,
+				6FB3094C1F23F8BA000E8C6D /* GetTopicByNameResponse.swift */,
 				6FC066261F2151C4003746BB /* LinkedAccountView.swift */,
 				6FC066271F2151C4003746BB /* Object.swift */,
 				6FC066281F2151C4003746BB /* PostBlobResponse.swift */,
@@ -557,17 +560,18 @@
 				6FC066661F2151C5003746BB /* FeedResponseTopicView.swift in Sources */,
 				6FC0665D1F2151C5003746BB /* AppCompactView.swift in Sources */,
 				6FC0664A1F2151C5003746BB /* BlobsAPI.swift in Sources */,
-				6FC0666A1F2151C5003746BB /* GetTopicNameResponse.swift in Sources */,
 				6FC066591F2151C5003746BB /* UsersAPI.swift in Sources */,
 				6FC066681F2151C5003746BB /* FeedResponseUserProfileView.swift in Sources */,
 				6FC066621F2151C5003746BB /* DeleteTopicNameRequest.swift in Sources */,
 				6FC066491F2151C4003746BB /* APIHelper.swift in Sources */,
 				6FC066791F2151C5003746BB /* PostReportRequest.swift in Sources */,
+				6FB3094D1F23F8BA000E8C6D /* GetTopicByNameResponse.swift in Sources */,
 				6FC0666E1F2151C5003746BB /* PostBlockedUserRequest.swift in Sources */,
 				6FC066561F2151C5003746BB /* SessionsAPI.swift in Sources */,
 				6FC066481F2151C4003746BB /* AlamofireImplementations.swift in Sources */,
 				6FC066891F2151C5003746BB /* TopicView.swift in Sources */,
 				6FC066771F2151C5003746BB /* PostReplyRequest.swift in Sources */,
+				6FB3094F1F23F8E1000E8C6D /* Configuration.swift in Sources */,
 				6FC066761F2151C5003746BB /* PostPinRequest.swift in Sources */,
 				6FC0665A1F2151C5003746BB /* APIs.swift in Sources */,
 				6FC0667A1F2151C5003746BB /* PostSessionRequest.swift in Sources */,
