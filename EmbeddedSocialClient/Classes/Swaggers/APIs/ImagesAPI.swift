@@ -65,7 +65,7 @@ open class ImagesAPI: APIBase {
      - parameter image: (body) MIME encoded contents of the image 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func imagesPostImage(imageType: ImageType_imagesPostImage, authorization: String, image: URL, completion: @escaping ((_ data: PostImageResponse?, _ error: ErrorResponse?) -> Void)) {
+    open class func imagesPostImage(imageType: ImageType_imagesPostImage, authorization: String, image: Data, completion: @escaping ((_ data: PostImageResponse?, _ error: ErrorResponse?) -> Void)) {
         imagesPostImageWithRequestBuilder(imageType: imageType, authorization: authorization, image: image).execute { (response, error) -> Void in
             completion(response?.body, error)
         }
@@ -92,7 +92,7 @@ open class ImagesAPI: APIBase {
      - parameter image: (body) MIME encoded contents of the image 
      - returns: RequestBuilder<PostImageResponse> 
      */
-    open class func imagesPostImageWithRequestBuilder(imageType: ImageType_imagesPostImage, authorization: String, image: URL) -> RequestBuilder<PostImageResponse> {
+    open class func imagesPostImageWithRequestBuilder(imageType: ImageType_imagesPostImage, authorization: String, image: Data) -> RequestBuilder<PostImageResponse> {
         var path = "/v0.7/images/{imageType}"
         path = path.replacingOccurrences(of: "{imageType}", with: "\(imageType.rawValue)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path

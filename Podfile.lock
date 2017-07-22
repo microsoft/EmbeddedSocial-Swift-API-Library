@@ -1,0 +1,28 @@
+PODS:
+  - Alamofire (4.0.0)
+  - EmbeddedSocialClient (0.7.0):
+    - Alamofire (~> 4.0)
+
+DEPENDENCIES:
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, tag `4.0.0`)
+  - EmbeddedSocialClient (from `EmbeddedSocialClient.podspec`)
+
+EXTERNAL SOURCES:
+  Alamofire:
+    :git: https://github.com/Alamofire/Alamofire.git
+    :tag: 4.0.0
+  EmbeddedSocialClient:
+    :path: EmbeddedSocialClient.podspec
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :git: https://github.com/Alamofire/Alamofire.git
+    :tag: 4.0.0
+
+SPEC CHECKSUMS:
+  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  EmbeddedSocialClient: 48697371a875a7fd45a4d4e01a753d283b07588a
+
+PODFILE CHECKSUM: 90f5db337b70ae434928649291325c32b12c72b8
+
+COCOAPODS: 1.2.1
