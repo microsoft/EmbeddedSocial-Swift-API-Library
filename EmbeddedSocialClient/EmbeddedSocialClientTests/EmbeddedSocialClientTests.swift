@@ -12,14 +12,17 @@ import XCTest
 class EmbeddedSocialClientTests: XCTestCase {
     
     // how long to wait for async API calls to finish before giving up
-    let testTimeout = 10.0
+    let testTimeout = 100.0
     
     // which server to talk to
     let serverURL = "https://dev-sharad.embeddedsocial.microsoft.com"
     
     // which authorization to use for API calls that require authentication
-    let authorization = "XXXXXXX"
+    let authorization = "XXXX"
     
+    // which images to use
+    let myImageURL = URL(string: "https://i2.wp.com/sharadagarwaldotnet.files.wordpress.com/2016/02/sharad_suit_square2.jpg")
+
     // Put setup code here. This method is called before the invocation of each test method in the class.
     override func setUp() {
         super.setUp()
@@ -102,17 +105,60 @@ class EmbeddedSocialClientTests: XCTestCase {
         }
     }
     
-    // Test the PostImage API call
-    func testPostImage() {
-        let expectation = self.expectation(description: "testPostImage")
+    // Test the PostImage API call using a resource file
+    func testPostImageFromFile() {
+        let expectation = self.expectation(description: "testPostImageFromFile")
         
         // setup the client interface
         EmbeddedSocialClientAPI.basePath = serverURL
         EmbeddedSocialClientAPI.customHeaders = ["Authorization": authorization]
         
         // load an image into memory
-        let myimage = #imageLiteral(resourceName: "sharad.jpg")
-        let imageData = UIImageJPEGRepresentation(myimage, 1.0) // as NSData?
+        let myImageFile = #imageLiteral(resourceName: "sharad")
+        let imageData = UIImageJPEGRepresentation(myImageFile, 1.0)
+        
+        // issue the API call
+        ImagesAPI.imagesPostImage(imageType: ImagesAPI.ImageType_imagesPostImage.contentBlob, image: imageData!) { (postImageResponse: PostImageResponse?, error: Error?) in
+            if let error = error {
+                XCTFail("error posting new image : \(error.localizedDescription)")
+                return
+            }
+            
+            guard let postImageResponse = postImageResponse else {
+                XCTFail("did not get post image response")
+                return
+            }
+            
+            XCTAssert(postImageResponse.blobHandle != nil)
+            XCTAssert(!postImageResponse.blobHandle!.isEmpty)
+            print("new blob handle is \(postImageResponse.blobHandle!)")
+            expectation.fulfill()
+        }
+        
+        self.waitForExpectations(timeout: self.testTimeout) { error in
+            if let error = error {
+                XCTFail("waitForExpectations errored: \(error)")
+            }
+        }
+    }
+    
+    // Test the PostImage API call using a URL
+    func testPostImageFromURL() {
+        let expectation = self.expectation(description: "testPostImageFromURL")
+        
+        // setup the client interface
+        EmbeddedSocialClientAPI.basePath = serverURL
+        EmbeddedSocialClientAPI.customHeaders = ["Authorization": authorization]
+        
+        // load an image into memory
+        let imageData : Data?
+        do {
+            imageData = try Data(contentsOf: myImageURL!)
+            print("size of image is \(imageData!)")
+        } catch {
+            XCTFail("error loading image from URL: \(myImageURL!)")
+            return
+        }
         
         // issue the API call
         ImagesAPI.imagesPostImage(imageType: ImagesAPI.ImageType_imagesPostImage.contentBlob, image: imageData!) { (postImageResponse: PostImageResponse?, error: Error?) in
