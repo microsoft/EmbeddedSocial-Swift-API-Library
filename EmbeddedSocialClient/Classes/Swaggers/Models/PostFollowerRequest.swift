@@ -10,6 +10,7 @@ import Foundation
 
 /** Request to post (accept) a follower */
 open class PostFollowerRequest: JSONEncodable {
+
     /** Gets or sets user handle */
     public var userHandle: String?
 
@@ -19,6 +20,7 @@ open class PostFollowerRequest: JSONEncodable {
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["userHandle"] = self.userHandle
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

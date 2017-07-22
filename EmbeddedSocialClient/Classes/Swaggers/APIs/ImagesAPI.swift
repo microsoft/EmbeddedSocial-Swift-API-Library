@@ -5,47 +5,48 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
-
 
 
 open class ImagesAPI: APIBase {
     /**
      Get image
-     
      - parameter blobHandle: (path) Blob handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func imagesGetImage(blobHandle: String, completion: @escaping ((_ data: URL?,_ error: Error?) -> Void)) {
-        imagesGetImageWithRequestBuilder(blobHandle: blobHandle).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func imagesGetImage(blobHandle: String, authorization: String, completion: @escaping ((_ data: URL?, _ error: ErrorResponse?) -> Void)) {
+        imagesGetImageWithRequestBuilder(blobHandle: blobHandle, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Get image
-     - GET /v0.6/images/{blobHandle}
-     - examples: [{output=none}]
-     
-     - parameter blobHandle: (path) Blob handle 
+     - GET /v0.7/images/{blobHandle}
 
+     - examples: [{output=none}]
+     - parameter blobHandle: (path) Blob handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<URL> 
      */
-    open class func imagesGetImageWithRequestBuilder(blobHandle: String) -> RequestBuilder<URL> {
-        var path = "/v0.6/images/{blobHandle}"
+    open class func imagesGetImageWithRequestBuilder(blobHandle: String, authorization: String) -> RequestBuilder<URL> {
+        var path = "/v0.7/images/{blobHandle}"
         path = path.replacingOccurrences(of: "{blobHandle}", with: "\(blobHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [:]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<URL>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
@@ -59,49 +60,53 @@ open class ImagesAPI: APIBase {
 
     /**
      Upload a new image
-     
      - parameter imageType: (path) Image type 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter image: (body) MIME encoded contents of the image 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func imagesPostImage(imageType: ImageType_imagesPostImage, image: Data, completion: @escaping ((_ data: PostImageResponse?,_ error: Error?) -> Void)) {
-        imagesPostImageWithRequestBuilder(imageType: imageType, image: image).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func imagesPostImage(imageType: ImageType_imagesPostImage, authorization: String, image: URL, completion: @escaping ((_ data: PostImageResponse?, _ error: ErrorResponse?) -> Void)) {
+        imagesPostImageWithRequestBuilder(imageType: imageType, authorization: authorization, image: image).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Upload a new image
-     - POST /v0.6/images/{imageType}
+     - POST /v0.7/images/{imageType}
      - Images will be resized. To access a resized image, append the 1 character size identifier to the blobHandle that is returned.                             - d is 25 pixels wide               - h is 50 pixels wide               - l is 100 pixels wide               - p is 250 pixels wide               - t is 500 pixels wide               - x is 1000 pixels wide                             - ImageType.UserPhoto supports d,h,l,p,t,x               - ImageType.ContentBlob supports d,h,l,p,t,x               - ImageType.AppIcon supports l                             All resized images will maintain their aspect ratio. Any orientation specified in the EXIF headers will be honored.
-     - examples: [{contentType=application/json, example={
-  "blobHandle" : "aeiou"
-}}, {contentType=application/xml, example=<null>
-  <blobHandle>string</blobHandle>
-</null>}]
-     - examples: [{contentType=application/json, example={
-  "blobHandle" : "aeiou"
-}}, {contentType=application/xml, example=<null>
-  <blobHandle>string</blobHandle>
-</null>}]
-     
-     - parameter imageType: (path) Image type 
-     - parameter image: (body) MIME encoded contents of the image 
 
+     - examples: [{contentType=application/json, example={
+  "blobHandle" : "aeiou"
+}}, {contentType=application/xml, example=<null>
+  <blobHandle>aeiou</blobHandle>
+</null>}]
+     - examples: [{contentType=application/json, example={
+  "blobHandle" : "aeiou"
+}}, {contentType=application/xml, example=<null>
+  <blobHandle>aeiou</blobHandle>
+</null>}]
+     - parameter imageType: (path) Image type 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
+     - parameter image: (body) MIME encoded contents of the image 
      - returns: RequestBuilder<PostImageResponse> 
      */
-    open class func imagesPostImageWithRequestBuilder(imageType: ImageType_imagesPostImage, image: Data) -> RequestBuilder<PostImageResponse> {
-        var path = "/v0.6/images/{imageType}"
+    open class func imagesPostImageWithRequestBuilder(imageType: ImageType_imagesPostImage, authorization: String, image: URL) -> RequestBuilder<PostImageResponse> {
+        var path = "/v0.7/images/{imageType}"
         path = path.replacingOccurrences(of: "{imageType}", with: "\(imageType.rawValue)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
         let parameters = image.encodeToJSON() as? [String:AnyObject]
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<PostImageResponse>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
     }
 
 }

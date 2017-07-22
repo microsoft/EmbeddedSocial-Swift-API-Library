@@ -10,6 +10,7 @@ import Foundation
 
 /** Comment view */
 open class CommentView: JSONEncodable {
+
     public enum BlobType: String { 
         case unknown = "Unknown"
         case image = "Image"
@@ -70,6 +71,7 @@ open class CommentView: JSONEncodable {
         nillableDictionary["totalReplies"] = self.totalReplies?.encodeToJSON()
         nillableDictionary["liked"] = self.liked
         nillableDictionary["contentStatus"] = self.contentStatus?.rawValue
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

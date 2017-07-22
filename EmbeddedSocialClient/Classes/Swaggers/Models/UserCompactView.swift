@@ -10,6 +10,7 @@ import Foundation
 
 /** User compact view */
 open class UserCompactView: JSONEncodable {
+
     public enum Visibility: String { 
         case _public = "Public"
         case _private = "Private"
@@ -47,6 +48,7 @@ open class UserCompactView: JSONEncodable {
         nillableDictionary["photoUrl"] = self.photoUrl
         nillableDictionary["visibility"] = self.visibility?.rawValue
         nillableDictionary["followerStatus"] = self.followerStatus?.rawValue
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

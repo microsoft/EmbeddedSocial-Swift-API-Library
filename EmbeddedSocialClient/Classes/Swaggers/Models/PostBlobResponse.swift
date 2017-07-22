@@ -10,6 +10,7 @@ import Foundation
 
 /** Response from post (create) blob */
 open class PostBlobResponse: JSONEncodable {
+
     /** Gets or sets blob handle */
     public var blobHandle: String?
 
@@ -19,6 +20,7 @@ open class PostBlobResponse: JSONEncodable {
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["blobHandle"] = self.blobHandle
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

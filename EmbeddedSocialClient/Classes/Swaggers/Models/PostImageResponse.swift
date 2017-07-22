@@ -10,6 +10,7 @@ import Foundation
 
 /** Response from post (create) image */
 open class PostImageResponse: JSONEncodable {
+
     /** Gets or sets blob handle */
     public var blobHandle: String?
 
@@ -19,6 +20,7 @@ open class PostImageResponse: JSONEncodable {
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["blobHandle"] = self.blobHandle
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

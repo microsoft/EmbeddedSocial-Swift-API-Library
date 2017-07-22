@@ -10,6 +10,7 @@ import Foundation
 
 /** Request to post (create) linked account */
 open class PostLinkedAccountRequest: JSONEncodable {
+
     /** Gets or sets a session token. */
     public var sessionToken: String?
 
@@ -19,6 +20,7 @@ open class PostLinkedAccountRequest: JSONEncodable {
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["sessionToken"] = self.sessionToken
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

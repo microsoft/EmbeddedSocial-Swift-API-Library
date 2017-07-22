@@ -10,6 +10,7 @@ import Foundation
 
 /** Request to put (update) user info */
 open class PutUserInfoRequest: JSONEncodable {
+
     /** Gets or sets first name of the user */
     public var firstName: String?
     /** Gets or sets last name of the user */
@@ -25,6 +26,7 @@ open class PutUserInfoRequest: JSONEncodable {
         nillableDictionary["firstName"] = self.firstName
         nillableDictionary["lastName"] = self.lastName
         nillableDictionary["bio"] = self.bio
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

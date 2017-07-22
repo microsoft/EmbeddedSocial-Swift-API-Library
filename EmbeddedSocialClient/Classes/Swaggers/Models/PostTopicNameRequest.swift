@@ -10,6 +10,7 @@ import Foundation
 
 /** Post topic name request */
 open class PostTopicNameRequest: JSONEncodable {
+
     public enum PublisherType: String { 
         case user = "User"
         case app = "App"
@@ -29,6 +30,7 @@ open class PostTopicNameRequest: JSONEncodable {
         nillableDictionary["publisherType"] = self.publisherType?.rawValue
         nillableDictionary["topicName"] = self.topicName
         nillableDictionary["topicHandle"] = self.topicHandle
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

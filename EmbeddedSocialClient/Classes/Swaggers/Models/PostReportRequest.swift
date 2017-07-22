@@ -10,6 +10,7 @@ import Foundation
 
 /** Request to post (create) a report for content */
 open class PostReportRequest: JSONEncodable {
+
     public enum Reason: String { 
         case threatsCyberbullyingHarassment = "ThreatsCyberbullyingHarassment"
         case childEndangermentExploitation = "ChildEndangermentExploitation"
@@ -28,6 +29,7 @@ open class PostReportRequest: JSONEncodable {
     open func encodeToJSON() -> Any {
         var nillableDictionary = [String:Any?]()
         nillableDictionary["reason"] = self.reason?.rawValue
+
         let dictionary: [String:Any] = APIHelper.rejectNil(nillableDictionary) ?? [:]
         return dictionary
     }

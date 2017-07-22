@@ -5,70 +5,72 @@
 // https://github.com/swagger-api/swagger-codegen
 //
 
+import Foundation
 import Alamofire
-
 
 
 open class LikesAPI: APIBase {
     /**
      Remove like from comment
-     
      - parameter commentHandle: (path) Comment handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func commentLikesDeleteLike(commentHandle: String, completion: @escaping ((_ data: Object?,_ error: Error?) -> Void)) {
-        commentLikesDeleteLikeWithRequestBuilder(commentHandle: commentHandle).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func commentLikesDeleteLike(commentHandle: String, authorization: String, completion: @escaping ((_ data: Object?, _ error: ErrorResponse?) -> Void)) {
+        commentLikesDeleteLikeWithRequestBuilder(commentHandle: commentHandle, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Remove like from comment
-     - DELETE /v0.6/comments/{commentHandle}/likes/me
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     
-     - parameter commentHandle: (path) Comment handle 
+     - DELETE /v0.7/comments/{commentHandle}/likes/me
 
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - parameter commentHandle: (path) Comment handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<Object> 
      */
-    open class func commentLikesDeleteLikeWithRequestBuilder(commentHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.6/comments/{commentHandle}/likes/me"
+    open class func commentLikesDeleteLikeWithRequestBuilder(commentHandle: String, authorization: String) -> RequestBuilder<Object> {
+        var path = "/v0.7/comments/{commentHandle}/likes/me"
         path = path.replacingOccurrences(of: "{commentHandle}", with: "\(commentHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [:]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<Object>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "DELETE", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
      Get likes for comment
-     
      - parameter commentHandle: (path) Comment handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter cursor: (query) Current read cursor (optional)
      - parameter limit: (query) Number of items to return (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func commentLikesGetLikes(commentHandle: String, cursor: String? = nil, limit: Int32? = nil, completion: @escaping ((_ data: FeedResponseUserCompactView?,_ error: Error?) -> Void)) {
-        commentLikesGetLikesWithRequestBuilder(commentHandle: commentHandle, cursor: cursor, limit: limit).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func commentLikesGetLikes(commentHandle: String, authorization: String, cursor: String? = nil, limit: Int32? = nil, completion: @escaping ((_ data: FeedResponseUserCompactView?, _ error: ErrorResponse?) -> Void)) {
+        commentLikesGetLikesWithRequestBuilder(commentHandle: commentHandle, authorization: authorization, cursor: cursor, limit: limit).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Get likes for comment
-     - GET /v0.6/comments/{commentHandle}/likes
+     - GET /v0.7/comments/{commentHandle}/likes
+
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -76,12 +78,12 @@ open class LikesAPI: APIBase {
     "firstName" : "aeiou",
     "lastName" : "aeiou",
     "photoUrl" : "aeiou",
-    "followerStatus" : "aeiou",
-    "visibility" : "aeiou",
+    "followerStatus" : "None",
+    "visibility" : "Public",
     "photoHandle" : "aeiou"
   } ]
 }}, {contentType=application/xml, example=<null>
-  <cursor>string</cursor>
+  <cursor>aeiou</cursor>
 </null>}]
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
@@ -90,139 +92,143 @@ open class LikesAPI: APIBase {
     "firstName" : "aeiou",
     "lastName" : "aeiou",
     "photoUrl" : "aeiou",
-    "followerStatus" : "aeiou",
-    "visibility" : "aeiou",
+    "followerStatus" : "None",
+    "visibility" : "Public",
     "photoHandle" : "aeiou"
   } ]
 }}, {contentType=application/xml, example=<null>
-  <cursor>string</cursor>
+  <cursor>aeiou</cursor>
 </null>}]
-     
      - parameter commentHandle: (path) Comment handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter cursor: (query) Current read cursor (optional)
      - parameter limit: (query) Number of items to return (optional)
-
      - returns: RequestBuilder<FeedResponseUserCompactView> 
      */
-    open class func commentLikesGetLikesWithRequestBuilder(commentHandle: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseUserCompactView> {
-        var path = "/v0.6/comments/{commentHandle}/likes"
+    open class func commentLikesGetLikesWithRequestBuilder(commentHandle: String, authorization: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseUserCompactView> {
+        var path = "/v0.7/comments/{commentHandle}/likes"
         path = path.replacingOccurrences(of: "{commentHandle}", with: "\(commentHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [
-            "cursor": cursor,
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "cursor": cursor, 
             "limit": limit?.encodeToJSON()
+        ])
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
         ]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<FeedResponseUserCompactView>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
      Add like to comment
-     
      - parameter commentHandle: (path) Comment handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func commentLikesPostLike(commentHandle: String, completion: @escaping ((_ data: Object?,_ error: Error?) -> Void)) {
-        commentLikesPostLikeWithRequestBuilder(commentHandle: commentHandle).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func commentLikesPostLike(commentHandle: String, authorization: String, completion: @escaping ((_ data: Object?, _ error: ErrorResponse?) -> Void)) {
+        commentLikesPostLikeWithRequestBuilder(commentHandle: commentHandle, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Add like to comment
-     - POST /v0.6/comments/{commentHandle}/likes
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     
-     - parameter commentHandle: (path) Comment handle 
+     - POST /v0.7/comments/{commentHandle}/likes
 
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - parameter commentHandle: (path) Comment handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<Object> 
      */
-    open class func commentLikesPostLikeWithRequestBuilder(commentHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.6/comments/{commentHandle}/likes"
+    open class func commentLikesPostLikeWithRequestBuilder(commentHandle: String, authorization: String) -> RequestBuilder<Object> {
+        var path = "/v0.7/comments/{commentHandle}/likes"
         path = path.replacingOccurrences(of: "{commentHandle}", with: "\(commentHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [:]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<Object>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
      Remove like from reply
-     
      - parameter replyHandle: (path) Reply handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func replyLikesDeleteLike(replyHandle: String, completion: @escaping ((_ data: Object?,_ error: Error?) -> Void)) {
-        replyLikesDeleteLikeWithRequestBuilder(replyHandle: replyHandle).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func replyLikesDeleteLike(replyHandle: String, authorization: String, completion: @escaping ((_ data: Object?, _ error: ErrorResponse?) -> Void)) {
+        replyLikesDeleteLikeWithRequestBuilder(replyHandle: replyHandle, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Remove like from reply
-     - DELETE /v0.6/replies/{replyHandle}/likes/me
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     
-     - parameter replyHandle: (path) Reply handle 
+     - DELETE /v0.7/replies/{replyHandle}/likes/me
 
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - parameter replyHandle: (path) Reply handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<Object> 
      */
-    open class func replyLikesDeleteLikeWithRequestBuilder(replyHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.6/replies/{replyHandle}/likes/me"
+    open class func replyLikesDeleteLikeWithRequestBuilder(replyHandle: String, authorization: String) -> RequestBuilder<Object> {
+        var path = "/v0.7/replies/{replyHandle}/likes/me"
         path = path.replacingOccurrences(of: "{replyHandle}", with: "\(replyHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [:]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<Object>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "DELETE", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
      Get likes for reply
-     
      - parameter replyHandle: (path) Reply handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter cursor: (query) Current read cursor (optional)
      - parameter limit: (query) Number of items to return (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func replyLikesGetLikes(replyHandle: String, cursor: String? = nil, limit: Int32? = nil, completion: @escaping ((_ data: FeedResponseUserCompactView?,_ error: Error?) -> Void)) {
-        replyLikesGetLikesWithRequestBuilder(replyHandle: replyHandle, cursor: cursor, limit: limit).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func replyLikesGetLikes(replyHandle: String, authorization: String, cursor: String? = nil, limit: Int32? = nil, completion: @escaping ((_ data: FeedResponseUserCompactView?, _ error: ErrorResponse?) -> Void)) {
+        replyLikesGetLikesWithRequestBuilder(replyHandle: replyHandle, authorization: authorization, cursor: cursor, limit: limit).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Get likes for reply
-     - GET /v0.6/replies/{replyHandle}/likes
+     - GET /v0.7/replies/{replyHandle}/likes
+
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -230,12 +236,12 @@ open class LikesAPI: APIBase {
     "firstName" : "aeiou",
     "lastName" : "aeiou",
     "photoUrl" : "aeiou",
-    "followerStatus" : "aeiou",
-    "visibility" : "aeiou",
+    "followerStatus" : "None",
+    "visibility" : "Public",
     "photoHandle" : "aeiou"
   } ]
 }}, {contentType=application/xml, example=<null>
-  <cursor>string</cursor>
+  <cursor>aeiou</cursor>
 </null>}]
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
@@ -244,139 +250,143 @@ open class LikesAPI: APIBase {
     "firstName" : "aeiou",
     "lastName" : "aeiou",
     "photoUrl" : "aeiou",
-    "followerStatus" : "aeiou",
-    "visibility" : "aeiou",
+    "followerStatus" : "None",
+    "visibility" : "Public",
     "photoHandle" : "aeiou"
   } ]
 }}, {contentType=application/xml, example=<null>
-  <cursor>string</cursor>
+  <cursor>aeiou</cursor>
 </null>}]
-     
      - parameter replyHandle: (path) Reply handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter cursor: (query) Current read cursor (optional)
      - parameter limit: (query) Number of items to return (optional)
-
      - returns: RequestBuilder<FeedResponseUserCompactView> 
      */
-    open class func replyLikesGetLikesWithRequestBuilder(replyHandle: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseUserCompactView> {
-        var path = "/v0.6/replies/{replyHandle}/likes"
+    open class func replyLikesGetLikesWithRequestBuilder(replyHandle: String, authorization: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseUserCompactView> {
+        var path = "/v0.7/replies/{replyHandle}/likes"
         path = path.replacingOccurrences(of: "{replyHandle}", with: "\(replyHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [
-            "cursor": cursor,
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "cursor": cursor, 
             "limit": limit?.encodeToJSON()
+        ])
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
         ]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<FeedResponseUserCompactView>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
      Add like to reply
-     
      - parameter replyHandle: (path) Reply handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func replyLikesPostLike(replyHandle: String, completion: @escaping ((_ data: Object?,_ error: Error?) -> Void)) {
-        replyLikesPostLikeWithRequestBuilder(replyHandle: replyHandle).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func replyLikesPostLike(replyHandle: String, authorization: String, completion: @escaping ((_ data: Object?, _ error: ErrorResponse?) -> Void)) {
+        replyLikesPostLikeWithRequestBuilder(replyHandle: replyHandle, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Add like to reply
-     - POST /v0.6/replies/{replyHandle}/likes
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     
-     - parameter replyHandle: (path) Reply handle 
+     - POST /v0.7/replies/{replyHandle}/likes
 
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - parameter replyHandle: (path) Reply handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<Object> 
      */
-    open class func replyLikesPostLikeWithRequestBuilder(replyHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.6/replies/{replyHandle}/likes"
+    open class func replyLikesPostLikeWithRequestBuilder(replyHandle: String, authorization: String) -> RequestBuilder<Object> {
+        var path = "/v0.7/replies/{replyHandle}/likes"
         path = path.replacingOccurrences(of: "{replyHandle}", with: "\(replyHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [:]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<Object>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
      Remove like from topic
-     
      - parameter topicHandle: (path) Topic handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicLikesDeleteLike(topicHandle: String, completion: @escaping ((_ data: Object?,_ error: Error?) -> Void)) {
-        topicLikesDeleteLikeWithRequestBuilder(topicHandle: topicHandle).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicLikesDeleteLike(topicHandle: String, authorization: String, completion: @escaping ((_ data: Object?, _ error: ErrorResponse?) -> Void)) {
+        topicLikesDeleteLikeWithRequestBuilder(topicHandle: topicHandle, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Remove like from topic
-     - DELETE /v0.6/topics/{topicHandle}/likes/me
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     
-     - parameter topicHandle: (path) Topic handle 
+     - DELETE /v0.7/topics/{topicHandle}/likes/me
 
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - parameter topicHandle: (path) Topic handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<Object> 
      */
-    open class func topicLikesDeleteLikeWithRequestBuilder(topicHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.6/topics/{topicHandle}/likes/me"
+    open class func topicLikesDeleteLikeWithRequestBuilder(topicHandle: String, authorization: String) -> RequestBuilder<Object> {
+        var path = "/v0.7/topics/{topicHandle}/likes/me"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [:]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<Object>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "DELETE", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "DELETE", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
      Get likes for topic
-     
      - parameter topicHandle: (path) Topic handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter cursor: (query) Current read cursor (optional)
      - parameter limit: (query) Number of items to return (optional)
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicLikesGetLikes(topicHandle: String, cursor: String? = nil, limit: Int32? = nil, completion: @escaping ((_ data: FeedResponseUserCompactView?,_ error: Error?) -> Void)) {
-        topicLikesGetLikesWithRequestBuilder(topicHandle: topicHandle, cursor: cursor, limit: limit).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicLikesGetLikes(topicHandle: String, authorization: String, cursor: String? = nil, limit: Int32? = nil, completion: @escaping ((_ data: FeedResponseUserCompactView?, _ error: ErrorResponse?) -> Void)) {
+        topicLikesGetLikesWithRequestBuilder(topicHandle: topicHandle, authorization: authorization, cursor: cursor, limit: limit).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Get likes for topic
-     - GET /v0.6/topics/{topicHandle}/likes
+     - GET /v0.7/topics/{topicHandle}/likes
+
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
   "data" : [ {
@@ -384,12 +394,12 @@ open class LikesAPI: APIBase {
     "firstName" : "aeiou",
     "lastName" : "aeiou",
     "photoUrl" : "aeiou",
-    "followerStatus" : "aeiou",
-    "visibility" : "aeiou",
+    "followerStatus" : "None",
+    "visibility" : "Public",
     "photoHandle" : "aeiou"
   } ]
 }}, {contentType=application/xml, example=<null>
-  <cursor>string</cursor>
+  <cursor>aeiou</cursor>
 </null>}]
      - examples: [{contentType=application/json, example={
   "cursor" : "aeiou",
@@ -398,78 +408,80 @@ open class LikesAPI: APIBase {
     "firstName" : "aeiou",
     "lastName" : "aeiou",
     "photoUrl" : "aeiou",
-    "followerStatus" : "aeiou",
-    "visibility" : "aeiou",
+    "followerStatus" : "None",
+    "visibility" : "Public",
     "photoHandle" : "aeiou"
   } ]
 }}, {contentType=application/xml, example=<null>
-  <cursor>string</cursor>
+  <cursor>aeiou</cursor>
 </null>}]
-     
      - parameter topicHandle: (path) Topic handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter cursor: (query) Current read cursor (optional)
      - parameter limit: (query) Number of items to return (optional)
-
      - returns: RequestBuilder<FeedResponseUserCompactView> 
      */
-    open class func topicLikesGetLikesWithRequestBuilder(topicHandle: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseUserCompactView> {
-        var path = "/v0.6/topics/{topicHandle}/likes"
+    open class func topicLikesGetLikesWithRequestBuilder(topicHandle: String, authorization: String, cursor: String? = nil, limit: Int32? = nil) -> RequestBuilder<FeedResponseUserCompactView> {
+        var path = "/v0.7/topics/{topicHandle}/likes"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [
-            "cursor": cursor,
+        let url = NSURLComponents(string: URLString)
+        url?.queryItems = APIHelper.mapValuesToQueryItems(values:[
+            "cursor": cursor, 
             "limit": limit?.encodeToJSON()
+        ])
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
         ]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<FeedResponseUserCompactView>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "GET", URLString: URLString, parameters: convertedParameters, isBody: false)
+        return requestBuilder.init(method: "GET", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
     /**
      Add like to topic
-     
      - parameter topicHandle: (path) Topic handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func topicLikesPostLike(topicHandle: String, completion: @escaping ((_ data: Object?,_ error: Error?) -> Void)) {
-        topicLikesPostLikeWithRequestBuilder(topicHandle: topicHandle).execute { (response, error) -> Void in
-            completion(response?.body, error);
+    open class func topicLikesPostLike(topicHandle: String, authorization: String, completion: @escaping ((_ data: Object?, _ error: ErrorResponse?) -> Void)) {
+        topicLikesPostLikeWithRequestBuilder(topicHandle: topicHandle, authorization: authorization).execute { (response, error) -> Void in
+            completion(response?.body, error)
         }
     }
 
 
     /**
      Add like to topic
-     - POST /v0.6/topics/{topicHandle}/likes
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
-</null>}]
-     
-     - parameter topicHandle: (path) Topic handle 
+     - POST /v0.7/topics/{topicHandle}/likes
 
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - examples: [{contentType=application/json, example={ }}, {contentType=application/xml, example=<null>
+</null>}]
+     - parameter topicHandle: (path) Topic handle 
+     - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - returns: RequestBuilder<Object> 
      */
-    open class func topicLikesPostLikeWithRequestBuilder(topicHandle: String) -> RequestBuilder<Object> {
-        var path = "/v0.6/topics/{topicHandle}/likes"
+    open class func topicLikesPostLikeWithRequestBuilder(topicHandle: String, authorization: String) -> RequestBuilder<Object> {
+        var path = "/v0.7/topics/{topicHandle}/likes"
         path = path.replacingOccurrences(of: "{topicHandle}", with: "\(topicHandle)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
+        let parameters: [String:Any]? = nil
 
-        let nillableParameters: [String:Any?] = [:]
- 
-        let parameters = APIHelper.rejectNil(nillableParameters)
- 
-        let convertedParameters = APIHelper.convertBoolToString(parameters)
- 
+        let url = NSURLComponents(string: URLString)
+        let nillableHeaders: [String: Any?] = [
+            "Authorization": authorization
+        ]
+        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
+
         let requestBuilder: RequestBuilder<Object>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
 
-        return requestBuilder.init(method: "POST", URLString: URLString, parameters: convertedParameters, isBody: true)
+        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: false, headers: headerParameters)
     }
 
 }
