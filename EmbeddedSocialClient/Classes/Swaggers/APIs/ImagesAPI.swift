@@ -93,20 +93,31 @@ open class ImagesAPI: APIBase {
      - returns: RequestBuilder<PostImageResponse> 
      */
     open class func imagesPostImageWithRequestBuilder(imageType: ImageType_imagesPostImage, authorization: String, image: Data) -> RequestBuilder<PostImageResponse> {
+
+        // construct the URL where the POST will be issued
         var path = "/v0.7/images/{imageType}"
         path = path.replacingOccurrences(of: "{imageType}", with: "\(imageType.rawValue)", options: .literal, range: nil)
         let URLString = EmbeddedSocialClientAPI.basePath + path
-        let parameters = image.encodeToJSON() as? [String:AnyObject]
-
-        let url = NSURLComponents(string: URLString)
-        let nillableHeaders: [String: Any?] = [
-            "Authorization": authorization
-        ]
-        let headerParameters = APIHelper.rejectNilHeaders(nillableHeaders)
-
-        let requestBuilder: RequestBuilder<PostImageResponse>.Type = EmbeddedSocialClientAPI.requestBuilderFactory.getBuilder()
-
-        return requestBuilder.init(method: "POST", URLString: (url?.string ?? URLString), parameters: parameters, isBody: true, headers: headerParameters)
+        let url = URL(string: URLString)!
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+        
+        // construct the body
+        urlRequest.httpBody = image
+        
+        // construct the headers
+        urlRequest.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue(authorization, forHTTPHeaderField: "Authorization")
+        
+        let dataRequest = Alamofire.request(urlRequest)
+        
+        /*
+        Response(
+            response: dataResponse.response!,
+            body: (dataResponse.data as! T)
+        ),
+        
+        ErrorResponse.HttpError(statusCode: dataResponse.response?.statusCode ?? 500, data: dataResponse.data, error: dataResponse.result.error!)
+         */
     }
-
 }
