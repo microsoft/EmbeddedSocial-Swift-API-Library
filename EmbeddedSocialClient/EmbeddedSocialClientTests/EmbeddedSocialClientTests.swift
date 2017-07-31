@@ -20,8 +20,9 @@ class EmbeddedSocialClientTests: XCTestCase {
     // which authorization to use for API calls that require authentication
     let authorization = "XXX"
     
-    // which images to use
+    // which image to use
     let myImageURL = URL(string: "https://i2.wp.com/sharadagarwaldotnet.files.wordpress.com/2016/02/sharad_suit_square2.jpg")
+    let myImageFileType = "image/jpeg"
 
     // Put setup code here. This method is called before the invocation of each test method in the class.
     override func setUp() {
@@ -104,42 +105,6 @@ class EmbeddedSocialClientTests: XCTestCase {
         }
     }
     
-    // Test the PostImage API call using a resource file
-    func testPostImageFromFile() {
-        let expectation = self.expectation(description: "testPostImageFromFile")
-        
-        // setup the client interface
-        EmbeddedSocialClientAPI.basePath = serverURL
-        
-        // load an image into memory
-        let myImageFile = #imageLiteral(resourceName: "sharad")
-        let imageData = UIImageJPEGRepresentation(myImageFile, 1.0)
-        
-        // issue the API call
-        ImagesAPI.imagesPostImage(imageType: ImagesAPI.ImageType_imagesPostImage.contentBlob, authorization: authorization, image: imageData!) { (postImageResponse: PostImageResponse?, error: Error?) in
-            if let error = error {
-                XCTFail("error posting new image : \(error.localizedDescription)")
-                return
-            }
-            
-            guard let postImageResponse = postImageResponse else {
-                XCTFail("did not get post image response")
-                return
-            }
-            
-            XCTAssert(postImageResponse.blobHandle != nil)
-            XCTAssert(!postImageResponse.blobHandle!.isEmpty)
-            print("new blob handle is \(postImageResponse.blobHandle!)")
-            expectation.fulfill()
-        }
-        
-        self.waitForExpectations(timeout: self.testTimeout) { error in
-            if let error = error {
-                XCTFail("waitForExpectations errored: \(error)")
-            }
-        }
-    }
-    
     // Test the PostImage API call using a URL
     func testPostImageFromURL() {
         let expectation = self.expectation(description: "testPostImageFromURL")
@@ -158,7 +123,7 @@ class EmbeddedSocialClientTests: XCTestCase {
         }
         
         // issue the API call
-        ImagesAPI.imagesPostImage(imageType: ImagesAPI.ImageType_imagesPostImage.contentBlob, authorization: authorization, image: imageData!) { (postImageResponse: PostImageResponse?, error: Error?) in
+        ImagesAPI.imagesPostImage(imageType: ImagesAPI.ImageType_imagesPostImage.contentBlob, authorization: authorization, image: imageData!, imageFileType: myImageFileType) { (postImageResponse: PostImageResponse?, error: Error?) in
             if let error = error {
                 XCTFail("error posting new image : \(error.localizedDescription)")
                 return
