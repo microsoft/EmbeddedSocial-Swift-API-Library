@@ -63,9 +63,10 @@ open class ImagesAPI: APIBase {
      - parameter imageType: (path) Image type 
      - parameter authorization: (header) Format is: \&quot;Scheme CredentialsList\&quot;. Possible values are:  - Anon AK&#x3D;AppKey  - SocialPlus TK&#x3D;SessionToken  - Facebook AK&#x3D;AppKey|TK&#x3D;AccessToken  - Google AK&#x3D;AppKey|TK&#x3D;AccessToken  - Twitter AK&#x3D;AppKey|RT&#x3D;RequestToken|TK&#x3D;AccessToken  - Microsoft AK&#x3D;AppKey|TK&#x3D;AccessToken  - AADS2S AK&#x3D;AppKey|[UH&#x3D;UserHandle]|TK&#x3D;AADToken 
      - parameter image: (body) MIME encoded contents of the image 
+     - parameter imageFileType: type of the file, such as "image/jpeg", "image/png", or "image/gif"
      - parameter completion: completion handler to receive the data and the error objects
      */
-    open class func imagesPostImage(imageType: ImageType_imagesPostImage, authorization: String, image: Data, completion: @escaping ((_ data: PostImageResponse?, _ error: ErrorResponse?) -> Void)) {
+    open class func imagesPostImage(imageType: ImageType_imagesPostImage, authorization: String, image: Data, imageFileType: String, completion: @escaping ((_ data: PostImageResponse?, _ error: ErrorResponse?) -> Void)) {
         
         // construct the URL where the POST will be issued
         var path = "/v0.7/images/{imageType}"
@@ -79,7 +80,7 @@ open class ImagesAPI: APIBase {
         urlRequest.httpBody = image
         
         // construct the headers
-        urlRequest.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue(imageFileType, forHTTPHeaderField: "Content-Type")
         urlRequest.setValue(authorization, forHTTPHeaderField: "Authorization")
 
         // issue the request
