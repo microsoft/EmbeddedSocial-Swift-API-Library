@@ -142,10 +142,8 @@ public final class ISOFullDate: CustomStringConvertible {
      */
     public static func from(string: String) -> ISOFullDate? {
         let components = string
-            .characters
             .split(separator: "-")
-            .map(String.init)
-            .flatMap { Int($0) }
+            .compactMap { Int($0) }
         guard components.count == 3 else { return nil }
 
         return ISOFullDate(

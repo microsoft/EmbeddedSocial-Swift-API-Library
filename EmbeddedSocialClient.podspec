@@ -9,5 +9,5 @@ Pod::Spec.new do |s|
   s.authors = 'Microsoft Embedded Social'
   s.license = 'MIT'
   s.source_files = 'EmbeddedSocialClient/Classes/Swaggers/**/*.swift'
-  s.dependency 'Alamofire', '~> 4.0'
+  s.dependency 'Alamofire', '~> 4.7.3'
 end
