@@ -16,9 +16,9 @@ public enum ErrorResponse : Error {
 }
 
 open class Response<T> {
-    open let statusCode: Int
-    open let header: [String: String]
-    open let body: T?
+    public let statusCode: Int
+    public let header: [String: String]
+    public let body: T?
 
     public init(statusCode: Int, header: [String: String], body: T?) {
         self.statusCode = statusCode
@@ -195,7 +195,7 @@ class Decoders {
         }
     }
 
-    static func decodeOptional<T: RawRepresentable, U: AnyObject where T.RawValue == U>(clazz: T, source: AnyObject) -> Decoded<T?> {
+    static func decodeOptional<T: RawRepresentable, U: AnyObject>(clazz: T, source: AnyObject) -> Decoded<T?> where T.RawValue == U {
         if let value = source as? U {
             if let enumValue = T.init(rawValue: value) {
                 return .success(enumValue)
@@ -758,11 +758,7 @@ class Decoders {
         }
         // Decoder for Object
         Decoders.addDecoder(clazz: Object.self) { (source: AnyObject, instance: AnyObject?) -> Decoded<Object> in
-            if let source = source as? Any {
-                return .success(source)
-            } else {
-                return .failure(.typeMismatch(expected: "Typealias Object", actual: "\(source)"))
-            }
+            return .success(source)
         }
         // Decoder for PostBlobResponse
         Decoders.addDecoder(clazz: PostBlobResponse.self) { (source: AnyObject, instance: AnyObject?) -> Decoded<PostBlobResponse> in

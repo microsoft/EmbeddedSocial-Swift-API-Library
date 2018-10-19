@@ -4,7 +4,7 @@ project 'EmbeddedSocialClient/EmbeddedSocialClient.xcodeproj'
 
 target 'EmbeddedSocialClient' do
   use_frameworks!
-  pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :tag => '4.0.0'
+  pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git', :tag => '4.7.3'
   pod 'EmbeddedSocialClient', :path => 'EmbeddedSocialClient.podspec'
 end
 
